@@ -1,0 +1,48 @@
+models:
+  Models\Groupe:
+    nom: string
+    timestamps: true
+    softDeletes: true
+  
+  Models\Type:
+    groupe_id: id foreign:groupes
+    designation: string
+    timestamps: true
+    softDeletes: true
+
+  
+  Models\Depense:
+    type_id: id foreign:types
+    sommes: integer
+    date: date
+    timestamps: true
+    softDeletes: true
+
+
+ 
+
+
+
+
+  
+
+seeders: Groupe, Type, Depense
+
+
+
+  
+  
+  
+ 
+
+
+  
+  
+
+   
+
+
+
+
+
+    

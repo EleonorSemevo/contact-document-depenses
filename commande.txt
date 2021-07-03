@@ -1,0 +1,169 @@
+
+Pour CONTACTES
+nom, prenom, organisation, poste, numero(portable 2, bureau 2, ), mail(prive2, professionnl2), organisation site, adresse(linkdin, facebook, twitter, skype), boite postale, adresse physique
+
+# STEP 1. create migration
+php artisan make:migration:schema create_contacts_table --model=0 --schema="nom:string,prenom:string,organisation:string,poste:string,numero_portable1:string,nmero_portable2:string,numero_bureau1:string,numero_bureau2:string,mail_professionel1:string,mail_professionel2:string,mail_prive1:string,mail_prive2:string,site_web_organisation:string,linkdin:string,facebook:string,twitter:string,skype:string,boite_postale:string,adresse_physique:string"
+php artisan migrate
+
+# STEP 2. create crud
+php artisan backpack:crud contact
+
+php artisan blueprint:build draft.yml
+
+
+
+$anne = date("Y");
+            $years = [];
+
+            for ($i=1900; $i<$anne; $i++){
+                $years[i] = $i;
+                }
+                return $years;
+            }
+
+<li class="nav-item nav-dropdown">
+    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-users"></i> Dépenses</a>
+    <ul class="nav-dropdown-items">
+        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('user') }}"><i class="nav-icon la la-user"></i> <span>Fonctionnalité 1</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('role') }}"><i class="nav-icon la la-id-badge"></i> <span>Fonctionnalité 2</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('permission') }}"><i class="nav-icon la la-key"></i> <span>Fonctionnalité 3</span></a></li>
+    </ul>
+</li>
+
+ 'heading'     => trans('backpack::base.welcome'), 
+        'content'     => trans('backpack::base.use_sidebar'),
+        'button_link' => backpack_url('logout'), 
+        'button_text' => trans('backpack::base.logout'),  
+
+$shares = DB::table('groupes')
+    ->join('types', 'types.id', '=', 'shares.user_id')
+    ->join('depenses', 'follows.user_id', '=', 'users.id')
+    ->where('follows.follower_id', '=', 3)
+    ->get();
+
+
+    $users = User::select('users*', 'analytics.*', DB::raw('SUM(analytics.revenue) As revenue'))
+         ->leftJoin('analytics', 'analytics.user_id', '=', 'users.id')
+         ->where('analytics.date', Carbon::today()->toDateString())
+         ->get();
+
+
+         $groupes = DB::table('types')
+                ->groupBy('groupes.id')
+                ->get();    pour grouper les depenses par categorie
+
+        $depense = DB::table('depenses')->select('goupes.nom','depenses.sommes')->join('types', 'types.id', '=', 'depenses.type_id')
+            ->join('groupes', 'groupes.id', '=', 'types.groupe_id')->groupBy('types.groupe_id')->get();
+
+
+//inclure un css
+<link rel="stylesheet" type="text/css" href=" asset('css/style.css') ">
+
+/*$date_debut = Carbon::createFromFormat('d/m/Y', $data->input('debut'));
+            $date_fin = Carbon::createFromFormat('d/m/Y', $data->input('fin'));*/
+
+<li class="nav-item"><a href="#" id="remove_filters_button" class="nav-link"><i class="la la-eraser"></i> Remove filters</a></li>
+
+<i class=""></i>
+
+<i class=""></i>
+
+
+////////////////*
+
+
+<div class="card-columns cols-2">
+    <div class="card">
+                <div class="card-header">Line Chart
+                  <div class="card-header-actions"><a class="card-header-action" href="http://www.chartjs.org" target="_blank"><small class="text-muted">docs</small></a></div>
+                </div>
+                <div class="card-body">
+                  <div class="chart-wrapper"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                    <canvas id="canvas-1" style="display: block; height: 194px; width: 388px;" width="426" height="213" class="chartjs-render-monitor"></canvas>
+                  </div>
+                </div>
+              </div>
+              
+    </div>
+</div>
+
+
+function drawChart() {
+
+    var data = google.visualization.arrayToDataTable([
+          ['Year', 'Sales'],
+          ['2004',  1000],
+          ['2005',  1170],
+          ['2006',  660],
+          ['2007',  1030]
+        ]);
+
+        var options = {
+          title: 'Company Performance',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('mon-chart'));
+
+        chart.draw(data, options);
+  }
+
+
+
+->select(DB::raw('count(id) as `data`'), DB::raw("DATE_FORMAT(created_at, '%m-%Y') new_date"),  DB::raw('YEAR(created_at) year, MONTH(created_at) month'))
+->groupby('year','month')
+->get();
+
+
+ $actuelle_annee = date("Y"); 
+
+$depenses = DB::table('depenses')->select(DB::raw("SUM(sommes) as sm", MONTH(date) month'))->whereYear('date', $actuelle_annee)
+        ->groupBy('month')
+        ->get();
+
+
+$uers = User::select('name','email','created_at')
+        ->orderBy('created_at')->get();// get User collection
+$user_list->groupBy(function ($item, $key) {
+   return $item->created_at->format('m');
+});
+
+strftime('%H %M %S %s','now')
+$depenses = DB::table('depenses')->select(DB::raw("SUM(sommes) as sm", "strftime('%m', date) as month)")->whereYear('date', $actuelle_annee)
+        ->groupBy(function ($item, $key) {
+   return $item->date->format('m');
+});
+
+$depenses_month = DB::table('depenses')->select(DB::raw(DB::raw("SUM(sommes) as sm"), DB::raw("DATE_FORMAT(date, '%m-%Y') new_date"),  DB::raw('YEAR(date) year, MONTH(date) month'))->whereDate('year', '=', $actuelle_annee)
+->groupby('month')
+->get();
+
+
+$depenses = DB::table('depenses')->select(DB::raw("SUM(sommes) as sm"), 'nom')->whereYear('date', $actuelle_annee)->join('types', 'types.id', '=', 'depenses.type_id')
+        ->join('groupes', 'groupes.id', '=', 'types.groupe_id')
+        ->groupBy('types.groupe_id')
+        ->get();
+
+$monthNum  = 3;
+$dateObj   = DateTime::createFromFormat('!m', $monthNum)->format('F');
+$monthName = $dateObj;
+
+
+today.toLocaleString('default', { month: 'long' })
+parseInt("17", 8);
+parseInt(depenses_month->month,10)
+
+
+
+<div class="row justify-content-between">
+				
+				<div class="col-6">
+					<div id="mon-chart" style="height: 500px; width: 800px;" ></div>
+					<div id="mon-chart-1" style="height: 300px; width: 800px;" ></div>
+
+				
+	</div>
+
+  <i class="las la-chart-area"></i>

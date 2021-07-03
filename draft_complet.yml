@@ -1,0 +1,92 @@
+models:
+  Models\Groupe:
+    nom: string
+    timestamps: true
+    softDeletes: true
+    relationships:
+      hasMany: Type
+
+      
+
+  Models\Document:
+    categorie_id: id foreign:categorie
+    langue_id: id foreign:langues 
+    titre: string
+    sous_titre: string nullable
+    auteur: string
+    co_auteur: string nullable
+    ISBN: integer nullable
+    mots_cles: longtext nullable
+    resume: string nullable
+    annee_edition: year nullable
+    ville_edition: string nullable
+    lieu_edition: string nullable
+    nombre_page: integer nullable
+    pp: string nullable
+    editeur: string nullable
+    edition: string nullable
+    timestamps: true
+    softDeletes: true
+    relationships:
+      hasOne: Categorie,Langue
+
+
+  Models\Type:
+    groupe_id: id foreign:groupe
+    designation: string
+    timestamps: true
+    softDeletes: true
+    relationships:
+      hasOne: Groupe
+    
+
+  Models\Depense:
+    groupe: id foreign:groupes 
+    type_id: id foreign:types
+    sommes: integer
+    date: date
+    relationships:
+      hasOne: Goupe, Type
+  
+
+  Models\Categorie:
+    categorie: enum:Livre, Article, Texte
+    timestamps: true
+    softDeletes: true
+
+  
+  Models\Langue:
+    langue: enum:Anglais,Mandarin,Hindi,Espagnol,Français,Arabe,Bengali,Russe,Portugais,Indonésien
+    timestamps: true
+    softDeletes: true
+
+
+
+
+
+  
+
+    
+Groupe depense
+type depense
+
+categorie
+
+
+
+  
+  
+  
+ 
+
+
+  
+  
+
+   
+
+
+
+
+
+    

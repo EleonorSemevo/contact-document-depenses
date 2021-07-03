@@ -1,0 +1,20 @@
+created:
+    - database/factories/Models/GroupeFactory.php
+    - database/factories/Models/TypeFactory.php
+    - database/factories/Models/DepenseFactory.php
+    - database/migrations/2021_06_22_194940_create_groupes_table.php
+    - database/migrations/2021_06_22_194941_create_types_table.php
+    - database/migrations/2021_06_22_194942_create_depenses_table.php
+    - app/Models/Groupe.php
+    - app/Models/Type.php
+    - app/Models/Depense.php
+    - database/seeders/GroupeSeeder.php
+    - database/seeders/TypeSeeder.php
+    - database/seeders/DepenseSeeder.php
+models:
+    Models\Document: { categorie_id: 'id foreign:categories', langue_id: 'id foreign:langues', titre: string, sous_titre: 'string nullable', auteur: string, co_auteur: 'string nullable', ISBN: 'integer nullable', mots_cles: 'longtext nullable', resume: 'string nullable', annee_edition: 'year nullable', ville_edition: 'string nullable', lieu_edition: 'string nullable', nombre_page: 'integer nullable', pp: 'string nullable', editeur: 'string nullable', edition: 'string nullable', timestamps: timestamps, softdeletes: softDeletes }
+    Models\Categorie: { titre: string, timestamps: timestamps, softdeletes: softDeletes }
+    Models\Langue: { titre: string, timestamps: timestamps, softdeletes: softDeletes }
+    Models\Groupe: { nom: string, timestamps: timestamps, softdeletes: softDeletes }
+    Models\Type: { groupe_id: 'id foreign:groupes', designation: string, timestamps: timestamps, softdeletes: softDeletes }
+    Models\Depense: { type_id: 'id foreign:types', sommes: integer, date: date, timestamps: timestamps, softdeletes: softDeletes }
