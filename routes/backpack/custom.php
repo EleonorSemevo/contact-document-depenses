@@ -21,4 +21,13 @@ Route::group([
     Route::crud('groupe', 'GroupeCrudController');
     Route::crud('type', 'TypeCrudController');
     Route::crud('depense', 'DepenseCrudController');
+    Route::crud('typerevenu', 'TyperevenuCrudController');
+    Route::crud('revenu', 'RevenuCrudController');
+    Route::crud('emprunsespece', 'EmprunsespeceCrudController');
+    Route::crud('pretespece', 'PretespeceCrudController');
+    Route::crud('travailleur', 'TravailleurCrudController');
+    Route::crud('intrant', 'IntrantCrudController');
+    Route::crud('domaine', 'DomaineCrudController');
+    Route::crud('pretdoc', 'PretdocCrudController');
+    Route::crud('emprunsdoc', 'EmprunsdocCrudController');
 }); // this should be the absolute last line of this file

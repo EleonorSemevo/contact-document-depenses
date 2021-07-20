@@ -62,6 +62,140 @@ models:
 
 
 
+************************************************************************************************************************
+
+
+models:
+  Models\Domaine:
+    nom: string
+    timestamps: true
+    softDeletes: true
+  
+  Models\Travailleur:
+    piece: string
+    domaine_id: id foreign:domaines
+    localite: string nullable
+    date: date
+    montant: unsignedInteger
+    prestataire: string nullable
+    mail: string nullable
+    telephone: string nullable
+    timestamps: true
+    softDeletes: true
+  
+  Models\Intrant:
+    piece: string
+    domaine_id: id foreign:domaines
+    localite: string nullable
+    date: date
+    montant: unsignedInteger
+    timestamps: true
+    softDeletes: true
+
+  Models\Pretespece:
+  date: date
+  debiteur: string
+  montant: unsignedInteger
+  motif: longtext nullable
+  date_prevue: date nullable
+  date_reelle: date nullable
+  obervation: longtext nullable
+  timestamps: true
+  softDeletes: true
+
+Models\Emprunsespece:
+  date: date
+  creancier: string
+  montant: unsignedInteger
+  motif: longtext nullable
+  date_prevue: date nullable
+  date_reelle: date nullable
+  obervation: longtext nullable
+  timestamps: true
+  softDeletes: true
+
+Models\Typerevenu:
+  nom: string
+  timestamps: true
+  softDeletes: true
+
+Models\Revenu:
+  revenu_id: id foreigne:typerevenus
+  montant: unsignedInteger
+  date: date
+  timestamps: true
+  softDeletes: true
+
+  Models\Pretdoc:
+    document_id: id foreign:documents
+    date_prevue: date
+    date_reelle: date
+    observation: longtext nullable
+    timestamps: true
+    softDeletes: true
+
+  Models\Emprunsdoc:
+    categorie_id: id foreign:categorie
+    langue_id: id foreign:langues 
+    titre: string
+    sous_titre: string nullable
+    auteur: string
+    co_auteur: string nullable
+    ISBN: integer nullable
+    mots_cles: longtext nullable
+    resume: string nullable
+    annee_edition: year nullable
+    ville_edition: string nullable
+    lieu_edition: string nullable
+    nombre_page: integer nullable
+    pp: string nullable
+    editeur: string nullable
+    edition: string nullable
+    date_prevue: date
+    date_reelle: date
+    observation: string
+    timestamps: true
+    softDeletes: true
+    
+
+
+  
+
+
+  
+
+
+ 
+ 
+
+
+
+
+  
+
+seeders: Groupe, Type, Depense
+
+
+
+  
+  
+  
+ 
+
+
+  
+  
+
+   
+
+
+
+
+
+    
+
+
+
 
 
   
