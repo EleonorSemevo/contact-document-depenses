@@ -18,6 +18,8 @@ class CreatePretdocsTable extends Migration
         Schema::create('pretdocs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('document_id')->constrained();
+            $table->date('date');
+            $table->string('emprunteur');
             $table->date('date_prevue')->nullable();
             $table->date('date_reelle')->nullable();
             $table->longText('observation')->nullable();

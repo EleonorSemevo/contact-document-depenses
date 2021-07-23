@@ -27,6 +27,10 @@ class EmprunsespeceRequest extends FormRequest
     {
         return [
             // 'name' => 'required|min:5|max:255'
+            'montant' => 'required',
+            'date' => 'required',
+            'creancier' => 'required',
+            
         ];
     }
 

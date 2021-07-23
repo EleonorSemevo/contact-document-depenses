@@ -40,9 +40,12 @@ class PretdocCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::column('document_id');
+        CRUD::column('date');
         CRUD::column('date_prevue');
         CRUD::column('date_reelle');
         CRUD::column('observation');
+        CRUD::column('emprunteur');
+        
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -62,10 +65,13 @@ class PretdocCrudController extends CrudController
         CRUD::setValidation(PretdocRequest::class);
 
         CRUD::field('document_id');
+        CRUD::field('emprunteur');
+        CRUD::field('date');
         CRUD::field('date_prevue');
         CRUD::field('date_reelle');
         CRUD::field('observation');
-
+        
+        
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');

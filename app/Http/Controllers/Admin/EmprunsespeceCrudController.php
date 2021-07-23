@@ -28,7 +28,7 @@ class EmprunsespeceCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Emprunsespece::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/emprunsespece');
-        CRUD::setEntityNameStrings('emprunsespece', 'emprunsespeces');
+        CRUD::setEntityNameStrings('emprunsespece', 'Empruns');
     }
 
     /**

@@ -27,6 +27,9 @@ class PretdocRequest extends FormRequest
     {
         return [
             // 'name' => 'required|min:5|max:255'
+            'document_id' => 'required',
+            'emprunteur'  => 'required',
+            'date' =>'required',
         ];
     }
 

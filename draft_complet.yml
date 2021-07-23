@@ -6,6 +6,31 @@ models:
     relationships:
       hasMany: Type
 
+  Models\Contact:
+    nom: string
+    prenom: string
+    organisation: string nullable
+    post: string nullable
+    numero_portable1: string
+    numero_whatsapp: string nullable
+    numero_bureau1: string nullable
+    numero_bureau2: string nullable
+    mail_professionel1: string nullable
+    mail_professionel2: string nullable
+    mail_prive1: string nullable
+    mail_prive2: string nullable
+    site_web_organisation: string nullable
+    linkdin: string nullable
+    facebook: string nullable
+    twitter: string nullable
+    skype: string nullable
+    viber: string nullable
+    youtube: string nullable
+    instagram: string nullable
+    boite_postale: string nullable
+    adresse_physique: string nullable
+    timestamps: true
+    softDeletes: true
       
 
   Models\Document:
@@ -157,6 +182,31 @@ Models\Revenu:
     timestamps: true
     softDeletes: true
     
+
+    Schema::create('contacts', function (Blueprint $table) {
+$table->bigIncrements('id');
+$table->string('nom');
+$table->string('prenom');
+$table->string('organisation')->nullable();
+$table->string('poste')->nullable();
+$table->string('numero_portable1');
+$table->string('nmero_portable2')->nullable();
+$table->string('numero_bureau1')->nullable();
+$table->string('numero_bureau2')->nullable();
+$table->string('mail_professionel1')->nullable();
+$table->string('mail_professionel2')->nullable();
+$table->string('mail_prive1')->nullable();
+$table->string('mail_prive2')->nullable();
+$table->string('site_web_organisation')->nullable();
+$table->string('linkdin')->nullable();
+$table->string('facebook')->nullable();
+$table->string('twitter')->nullable();
+$table->string('skype')->nullable();
+$table->string('boite_postale')->nullable();
+$table->string('adresse_physique')->nullable();
+$table->timestamps();
+});
+
 
 
   

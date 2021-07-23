@@ -27,6 +27,8 @@ class TyperevenuRequest extends FormRequest
     {
         return [
             // 'name' => 'required|min:5|max:255'
+            'nom' => 'required',
+            
         ];
     }
 

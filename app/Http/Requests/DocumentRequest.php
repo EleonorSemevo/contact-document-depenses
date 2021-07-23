@@ -29,6 +29,7 @@ class DocumentRequest extends FormRequest
             // 'name' => 'required|min:5|max:255'
             'titre' => 'required',
             'auteur' => 'required',
+            'langue_id' => 'required',
         
         ];
     }

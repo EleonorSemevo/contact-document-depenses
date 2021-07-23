@@ -39,20 +39,13 @@ class EmprunsdocCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        CRUD::column('preteur');
+        CRUD::column('date');
+        CRUD::column('preteur');
         CRUD::column('titre');
         CRUD::column('sous_titre');
         CRUD::column('auteur');
-        CRUD::column('co_auteur');
         CRUD::column('ISBN');
-        CRUD::column('mots_cles');
-        CRUD::column('resume');
-        CRUD::column('annee_edition');
-        CRUD::column('ville_edition');
-        CRUD::column('lieu_edition');
-        CRUD::column('nombre_page');
-        CRUD::column('pp');
-        CRUD::column('editeur');
-        CRUD::column('edition');
         CRUD::column('date_prevue');
         CRUD::column('date_reelle');
         CRUD::column('observation');
@@ -74,6 +67,13 @@ class EmprunsdocCrudController extends CrudController
     {
         CRUD::setValidation(EmprunsdocRequest::class);
 
+        CRUD::addField(
+        [   // CKEditor
+            'name'          => 'preteur',
+            'label'         => 'Emprunté chez',
+            'type'          => 'text'
+        ]);
+        CRUD::field('date');
         CRUD::field('titre');
         CRUD::field('sous_titre');
         CRUD::field('auteur');

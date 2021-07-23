@@ -58,13 +58,37 @@ class ContactCrudController extends CrudController
     {
         CRUD::setValidation(ContactRequest::class);
 
-        CRUD::setFromDb(); // fields
+        //CRUD::setFromDb(); // fields
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');
          * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
          */
+
+        CRUD::field('nom');
+        CRUD::field('prenom');
+        CRUD::field('organisation');
+        CRUD::field('poste');
+        CRUD::field('numero_portable');
+        CRUD::field('numero_whatsapp');
+        CRUD::field('numero_bureau_1');
+        CRUD::field('numero_bureau_2');
+        CRUD::field('mail_professionel_1');
+        CRUD::field('mail_professionel_2');
+        CRUD::field('mail_prive_1');
+        CRUD::field('mail_prive_2');
+        CRUD::field('site_web_organisation');
+        CRUD::field('linkdin');
+        CRUD::field('facebook');
+        CRUD::field('twitter');
+        CRUD::field('skype');
+        CRUD::field('viber');
+        CRUD::field('youtube');
+        CRUD::field('instagram');
+        CRUD::field('boite_postale');
+        CRUD::field('adresse_physique');
+
     }
 
     /**

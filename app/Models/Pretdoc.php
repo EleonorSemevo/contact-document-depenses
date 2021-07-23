@@ -18,9 +18,11 @@ class Pretdoc extends Model
      */
     protected $fillable = [
         'document_id',
+        'date',
         'date_prevue',
         'date_reelle',
         'observation',
+        'emprunteur',
     ];
 
     /**

@@ -18,6 +18,8 @@ class Emprunsdoc extends Model
      */
     protected $fillable = [
         'titre',
+        'date',
+        'preteur',
         'sous_titre',
         'auteur',
         'co_auteur',

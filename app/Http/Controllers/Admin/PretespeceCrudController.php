@@ -28,7 +28,7 @@ class PretespeceCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Pretespece::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/pretespece');
-        CRUD::setEntityNameStrings('pretespece', 'pretespeces');
+        CRUD::setEntityNameStrings('pretespece', 'Prets');
     }
 
     /**

@@ -27,6 +27,12 @@ class TravailleurRequest extends FormRequest
     {
         return [
             // 'name' => 'required|min:5|max:255'
+            'domaine_id' => 'required',
+            'piece'  => 'required',
+            'localite'  => 'required',
+            'date'  => 'required',
+            'montant'  => 'required',
+            'prestataire'  => 'required',
         ];
     }
 

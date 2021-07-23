@@ -27,6 +27,10 @@ class EmprunsdocRequest extends FormRequest
     {
         return [
             // 'name' => 'required|min:5|max:255'
+            'preteur' =>'required',
+            'auteur'  =>'required',
+            'titre'    =>'required',
+            'date' =>'required',
         ];
     }
 

@@ -29,7 +29,7 @@ class ContactRequest extends FormRequest
             // 'name' => 'required|min:5|max:255'
             'nom' => 'required',
             'prenom' => 'required',
-            'numero_portable1' => 'required'
+            'numero_portable' => 'required'
             
         ];
     }

@@ -21,7 +21,7 @@ class CreateEmprunsespecesTable extends Migration
             $table->string('motif')->nullable();
             $table->date('date_prevue')->nullable();
             $table->date('date_reelle')->nullable();
-            $table->string('obervation')->nullable();
+            $table->longText('obervation')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -15,8 +15,6 @@
 </li>
 @endif
 @if(backpack_user()->hasRole('administration'))
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('categorie') }}'><i class='nav-icon la la-question'></i> Categories</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('langue') }}'><i class='nav-icon la la-question'></i> Langues</a></li>
 
 @endif
 
@@ -24,7 +22,8 @@
 <li class="nav-item nav-dropdown">
     <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon las la-store-alt"></i>Documents</a>
     <ul class="nav-dropdown-items">
-
+    <li class='nav-item'><a class='nav-link' href='{{ backpack_url('categorie') }}'><i class='nav-icon la la-question'></i> Categories</a></li>
+    <li class='nav-item'><a class='nav-link' href='{{ backpack_url('langue') }}'><i class='nav-icon la la-question'></i> Langues</a></li>
     <li class='nav-item'><a class='nav-link' href='{{ backpack_url('document') }}'><i class='nav-icon las la-folder'></i>Mes Documents</a></li>
     <li class='nav-item'><a class='nav-link' href='{{ backpack_url('pretdoc') }}'><i class='nav-icon la la-question'></i> Docs Prêtés</a></li>
     <li class='nav-item'><a class='nav-link' href='{{ backpack_url('emprunsdoc') }}'><i class='nav-icon la la-question'></i> Docs Empruntés</a></li>

@@ -18,6 +18,8 @@ class CreateEmprunsdocsTable extends Migration
         Schema::create('emprunsdocs', function (Blueprint $table) {
             $table->id();
             $table->string('titre');
+            $table->string('preteur')->nullable();
+            $table->date('date');
             $table->string('sous_titre')->nullable();
             $table->string('auteur');
             $table->string('co_auteur')->nullable();
