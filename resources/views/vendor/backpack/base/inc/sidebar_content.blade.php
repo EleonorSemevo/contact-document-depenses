@@ -23,11 +23,11 @@
 <li class="nav-item nav-dropdown">
     <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon las la-store-alt"></i>Documents</a>
     <ul class="nav-dropdown-items">
-    <li class='nav-item'><a class='nav-link' href='{{ backpack_url('categorie') }}'><i class='nav-icon la la-question'></i> Categories</a></li>
-    <li class='nav-item'><a class='nav-link' href='{{ backpack_url('langue') }}'><i class='nav-icon la la-question'></i> Langues</a></li>
+    <li class='nav-item'><a class='nav-link' href='{{ backpack_url('categorie') }}'><i class='nav-icon las la-tags'></i> Categories</a></li>
+    <li class='nav-item'><a class='nav-link' href='{{ backpack_url('langue') }}'><i class='nav-icon las la-language'></i> Langues</a></li>
     <li class='nav-item'><a class='nav-link' href='{{ backpack_url('document') }}'><i class='nav-icon las la-folder'></i>Mes Documents</a></li>
-    <li class='nav-item'><a class='nav-link' href='{{ backpack_url('pretdoc') }}'><i class='nav-icon la la-question'></i> Docs Prêtés</a></li>
-    <li class='nav-item'><a class='nav-link' href='{{ backpack_url('emprunsdoc') }}'><i class='nav-icon la la-question'></i> Docs Empruntés</a></li>
+    <li class='nav-item'><a class='nav-link' href='{{ backpack_url('pretdoc') }}'><i class='nav-icon las la-indent '></i> Docs Prêtés</a></li>
+    <li class='nav-item'><a class='nav-link' href='{{ backpack_url('emprunsdoc') }}'><i class='nav-icon las la-outdent'></i> Docs Empruntés</a></li>
 </ul>
 </li>
 
@@ -39,13 +39,13 @@
 
 
 <li class="nav-item nav-dropdown">
-    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon las la-store-alt"></i> Finances</a>
+    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon las la-money-check-alt"></i> Finances</a>
     <ul class="nav-dropdown-items">
         <li class="nav-item"><a class="nav-link" href="{{ backpack_url('depense') }}"><i class="nav-icon las la-coins"></i> <span>Mes dépenses</span></a></li>
-        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('typerevenu') }}'><i class='nav-icon la la-question'></i> Type revenus</a></li>
-        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('revenu') }}'><i class='nav-icon la la-question'></i> Revenus</a></li>
-        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('emprunsespece') }}'><i class='nav-icon la la-question'></i> Empruns </a></li>
-        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('pretespece') }}'><i class='nav-icon la la-question'></i> Prêts</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('typerevenu') }}'><i class='nav-icon las la-tags'></i> Type revenus</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('revenu') }}'><i class='nav-icon las la-hand-holding-usd'></i> Revenus</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('emprunsespece') }}'><i class='nav-icon las la-money-bill-alt'></i> Empruns </a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('pretespece') }}'><i class='nav-icon las la-wallet'></i> Prêts</a></li>
         <li class="nav-item"><a class="nav-link" href="{{url('operation')}}"><i class="nav-icon la la-id-badge"></i> <span>Filtrer</span></a></li>
         <li class="nav-item"><a class="nav-link" href="{{ url('operation/statistiques') }}"><i class="nav-icon las la-chart-area"></i> <span>Graphes</span></a></li>
     </ul>
@@ -56,11 +56,11 @@
 -->
 
 <li class="nav-item nav-dropdown">
-    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon las la-store-alt"></i> Immobiliers</a>
+    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon las la-warehouse"></i> Immobiliers</a>
     <ul class="nav-dropdown-items">
-        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('domaine') }}'><i class='nav-icon la la-question'></i> Domaines</a></li>
-        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('travailleur') }}'><i class='nav-icon la la-question'></i> Travailleurs</a></li>
-        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('intrant') }}'><i class='nav-icon la la-question'></i> Intrants</a></li> 
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('domaine') }}'><i class='nav-icon la la-tags'></i> Domaines</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('travailleur') }}'><i class='nav-icon la la-user-friends'></i> Travailleurs</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('intrant') }}'><i class='nav-icon la la-shapes'></i> Intrants</a></li> 
     </ul>
 </li>
 
