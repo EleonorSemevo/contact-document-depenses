@@ -33,9 +33,9 @@ Route::get('/operation', function () {
 Route::get('/', function () {
     return redirect('/admin');
 });
-Route::get('/operation', [DepenseController::class, 'depense_totales']);
+Route::get('/operation', [DepenseController::class, 'depense_totales_2']);
 
 //pour la recherche par mois
-Route::post('/month',  [DepenseController::class, 'depenses_mois']);
+Route::post('/month',  [DepenseController::class, 'depenses_mois_2']);
 
 Route::get('/operation/statistiques', [DiagramController::class, 'diagram']);
