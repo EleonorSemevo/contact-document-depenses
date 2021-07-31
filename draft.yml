@@ -4,9 +4,8 @@ models:
     timestamps: true
     softDeletes: true
   
-  Models\Type:
-    groupe_id: id foreign:groupes
-    designation: string
+  Models\Typerevenu:
+    nom: string
     timestamps: true
     softDeletes: true
 
