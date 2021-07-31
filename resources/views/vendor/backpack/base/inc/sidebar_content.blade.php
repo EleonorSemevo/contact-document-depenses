@@ -15,16 +15,20 @@
 </li>
 @endif
 @if(backpack_user()->hasRole('administration'))
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('categorie') }}'><i class='nav-icon la la-question'></i> Categories</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('langue') }}'><i class='nav-icon la la-question'></i> Langues</a></li>
+
 
 @endif
 
-
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('document') }}'><i class='nav-icon las la-folder'></i> Documents</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('empruntdoc') }}'><i class='nav-icon la la-question'></i> Empruntdocs</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('pretdoc') }}'><i class='nav-icon la la-question'></i> Pretdocs</a></li>
-
+<li class="nav-item nav-dropdown">
+    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon las la-store-alt"></i> Documents </a>
+    <ul class="nav-dropdown-items">
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('categorie') }}'><i class='nav-icon la la-question'></i> Categories</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('langue') }}'><i class='nav-icon la la-question'></i> Langues</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('document') }}'><i class='nav-icon las la-folder'></i> Documents</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('empruntdoc') }}'><i class='nav-icon la la-question'></i> Empruntdocs</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('pretdoc') }}'><i class='nav-icon la la-question'></i> Pretdocs</a></li>
+    </ul>
+</li>
 @if(backpack_user()->hasRole('administration'))
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('groupe') }}'><i class='nav-icon la la-question'></i> Groupes</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('type') }}'><i class='nav-icon la la-question'></i> Types</a></li>
@@ -40,7 +44,6 @@
         <li class="nav-item"><a class="nav-link" href="{{ url('operation/statistiques') }}"><i class="nav-icon las la-chart-area"></i> <span>Graphes</span></a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('pretespece') }}'><i class='nav-icon la la-question'></i> Pretespeces</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('empruntespece') }}'><i class='nav-icon la la-question'></i> Empruntespeces</a></li>
-
     </ul>
 </li>
 
