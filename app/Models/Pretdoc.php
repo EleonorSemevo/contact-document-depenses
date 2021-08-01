@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Events\PretdocSaved;
+use App\Events\PretdocUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -16,6 +18,12 @@ class Pretdoc extends Model
      *
      * @var array
      */
+
+    protected $dispatchesEvents = [
+       /* 'saved' => PretdocSaved::class,
+        'updated' => PretdocUpdated::class,*/
+    ];
+
     protected $fillable = [
         'document_id',
         'date',

@@ -51,6 +51,21 @@ class PretdocCrudController extends CrudController
          * - CRUD::column('price')->type('number');
          * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
          */
+         /*$this->crud->addColumn([
+             'label' => 'status',
+             'type' => 'boolean',
+             'name' => 'status',
+             'options' =>[true=>'oui', false=>'non'],
+             'content' =>[
+                 'header' => 'Something',
+                 'body' => 'Lorem',
+                ],
+             'wrapper' => [
+                 'class' => 'badge',
+                 'style' => 'bg-success',
+             ],
+         ]
+        );*/
     }
 
     /**
@@ -75,6 +90,10 @@ class PretdocCrudController extends CrudController
          * - CRUD::field('price')->type('number');
          * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
          */
+
+        
+         
+
     }
 
     /**

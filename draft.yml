@@ -1,31 +1,18 @@
 models:
-  Models\Groupe:
-    nom: string
-    timestamps: true
-    softDeletes: true
-  
-  Models\Typerevenu:
-    nom: string
-    timestamps: true
-    softDeletes: true
-
-  
-  Models\Depense:
-    type_id: id foreign:types
-    sommes: integer
+  Models\Investissement:
+    domaine_id: id foreign:domaines
     date: date
+    numero_piece: integer
+    localite: string
+    cout_intrant: integer
+    cout_main_oeuvre: integer
+    cout_transport: integer
+    prestataire: string
+    mail: string
+    telephone: integer
     timestamps: true
     softDeletes: true
 
-
- 
-
-
-
-
-  
-
-seeders: Groupe, Type, Depense
 
 
 
