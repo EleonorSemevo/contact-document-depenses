@@ -53,10 +53,10 @@
 <li class="nav-item nav-dropdown">
     <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon las la-store-alt"></i> Revenus  </a>
     <ul class="nav-dropdown-items">
-     
-        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('domaine') }}'><i class='nav-icon la la-question'></i> Domaines</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('revenu') }}'><i class='nav-icon la la-question'></i> Revenus</a></li>
-
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('typerevenu') }}'><i class='nav-icon la la-question'></i> Typerevenus</a></li>
     </ul>
 </li>
+
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('domaine') }}'><i class='nav-icon la la-question'></i> Domaines</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('investissement') }}'><i class='nav-icon la la-question'></i> Invest immobilier</a></li>
