@@ -45,4 +45,6 @@ class Investissement extends Model
     {
         return $this->belongsTo(\App\Models\Domaine::class);
     }
+    //
+     
 }

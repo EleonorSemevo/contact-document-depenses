@@ -15,6 +15,7 @@ class InvestissementCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\InlineCreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
@@ -83,6 +84,22 @@ class InvestissementCrudController extends CrudController
          * - CRUD::field('price')->type('number');
          * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
          */
+            
+
+         $this->crud->modifyField("domaine_id",[
+              'label' => "Domaine",
+              'default' => strval($this->crud->getRequest()->input('id')),
+              'type' => 'select',
+              'name' => 'domaine_id',
+              'model' => "App\Models\Domaine",
+              'attribute' => 'nom',
+              'options'   => (function ($query) 
+              {
+                  $id = $this->crud->getRequest()->input('id');
+                return $query->orderBy('nom', 'ASC')->get();
+              
+    }),
+         ]);
     }
 
     /**

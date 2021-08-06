@@ -46,6 +46,7 @@ class EmpruntdocCrudController extends CrudController
          * - CRUD::column('price')->type('number');
          * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
          */
+        
     }
 
     /**

@@ -29,9 +29,20 @@ class Domaine extends Model
         'id' => 'integer',
     ];
 
-   /* public function openGoogle($crud = false)
+  /* public function investissement() //Folder model
     {
-        return '<a class="btn btn-sm btn-link" target="_blank" href="http://google.com?q='.urlencode($this->text).'" data-toggle="tooltip" title="Just a demo custom button."><i class="fa fa-search"></i> Google it</a>';
-    }*/
+        return $this->hasMany(Investissement::class);
+    }
+*/
+    public function create_invest(){
+        $id = $this->id;
+        return '<a class="btn btn-sm btn-link" href="http://127.0.0.1:8000/admin/investissement/create?id='.$id.'" data-toggle="tooltip" title="Just a demo custom button."><i class="fa fa-search"></i> Ajouter </a>';
+        
+    }
+
+    public function liste_invest(){
+        return '<a class="btn btn-sm btn-link btn-primary" href="http://127.0.0.1:8000/admin/investissement/" data-toggle="tooltip" title="Just a demo custom button."><i class="fa fa-search"></i> Consulter liste</a>';
+    }
+
 
 }

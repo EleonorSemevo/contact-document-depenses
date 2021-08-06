@@ -15,6 +15,7 @@ class DomaineCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\InlineCreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
@@ -46,6 +47,13 @@ class DomaineCrudController extends CrudController
          * - CRUD::column('price')->type('number');
          * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
          */
+        $this->crud->addButtonFromModelFunction('line', 'create_invest', 'create_invest', 'beginning');
+         $this->crud->addButtonFromModelFunction('top', 'liste_invest', 'liste_invest');
+         $this->crud->removeButton('create');
+
+        
+        
+        
     }
 
     /**
@@ -60,7 +68,18 @@ class DomaineCrudController extends CrudController
 
         CRUD::field('nom');
 
-        /**
+        /*
+        $this->crud->addField(
+        [
+            'type' => "relationship",
+            'name' => 'investissement',
+            'ajax' => true,
+            'inline_create' => true,
+        ]);
+        //$this->crud->addButtonFromView('top', 'create', 'crud::buttons.create', 'beginning');
+
+
+    
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');
          * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
