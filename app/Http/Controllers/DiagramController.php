@@ -20,6 +20,7 @@ class DiagramController extends Controller
         $fin = $request->input('fin');
         $categorie_id = intval($request->input('categorie'),10);
 
+        //dépenses par catégorie
         $depenses = $this->depense__par_categorie_totales($debut, $fin);
         $data = $this->getArray($depenses, 'sm');
         $data_get = $this->convert_to_int($data);
@@ -36,7 +37,11 @@ class DiagramController extends Controller
             [
                 'chart' => $chart->build($data_get, $names),
                 'categories' => $this->get_categories(),
-                's_categorie_chart' =>$chart->build($s_categorie_values, $s_categorie_names)
+                's_categorie_chart' => $chart->build($s_categorie_values, $s_categorie_names),
+                //'s_categorie_chart' => $chart->build([100,200], ["mmm","llll"]),
+                'sous_categorie' => $this->get_sous_categorie($categorie_id),
+                'categorie_id' => $categorie_id,
+               
         ]);
 
     } 

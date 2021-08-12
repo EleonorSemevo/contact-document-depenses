@@ -39,3 +39,4 @@ Route::get('/operation', [DepenseController::class, 'depense_totales']);
 Route::post('/month',  [DepenseController::class, 'depenses_mois']);
 
 Route::get('/operation/statistiques', [DiagramController::class, 'index']);
+Route::post('/operation/statistiques', [DiagramController::class, 'index']);

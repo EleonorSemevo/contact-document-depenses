@@ -7,6 +7,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use App\Models\Groupe;
+use App\Models\Type;
 use DB;
 use Carbon\Carbon;
 
@@ -74,9 +75,9 @@ class Controller extends BaseController
 
     public function getArray($table, $attribut){
         $table_array=[];
-        foreach($table as $table)
+        foreach($table as $t)
         {
-            array_push($table_array, $table->$attribut);
+            array_push($table_array, $t->$attribut);
         }
 
         return $table_array;
@@ -96,23 +97,25 @@ class Controller extends BaseController
     }
 
     public function depenses_par_sous_categorie($debut,$fin,$categorie_id){
-        // if($debut != null && $fin != null){
+         if($debut != null && $fin != null){
                 //les deux
                 $depenses = DB::table('depenses')
                 ->select(DB::raw("SUM(sommes) as sm"), 'types.designation')
                 ->whereBetween('date', [$debut, $fin])
                 ->where('groupes.id','=',$categorie_id)
                 ->where('depenses.deleted_at','=',null)
-                ->join('types', 'types.id', '!=', 'depenses.type_id')
+                ->join('types', 'types.id', '=', 'depenses.type_id')
                 ->join('groupes', 'groupes.id', '=', 'types.groupe_id')
                 ->groupBy('depenses.type_id')
                 ->get();
-      //  }
 
-       /* else if ($debut ==null && $fin!=null) {
+                return $depenses;
+        }
+
+        else if ($debut ==null && $fin!=null) {
 
             //fin 
-            $depenses = DB::table('depenses')
+            /*$depenses = DB::table('depenses')
             ->select(DB::raw("SUM(sommes) as sm"), 'types.designation' )
             ->whereDate('date', '=', $fin)
             ->where('groupes.id','=',$categorie_id)
@@ -121,6 +124,18 @@ class Controller extends BaseController
             ->join('groupes', 'groupes.id', '=', 'types.groupe_id')
             ->groupBy('depenses.type_id')
             ->get();
+            */
+
+            $depenses = DB::table('depenses')
+                ->select(DB::raw("SUM(sommes) as sm"), 'types.designation')
+                ->where('groupes.id','=',$categorie_id)
+                ->where('groupes.id','=',$categorie_id)
+                ->where('depenses.deleted_at','=',null)
+                ->join('types', 'types.id', '=', 'depenses.type_id')
+                ->join('groupes', 'groupes.id', '=', 'types.groupe_id')
+                ->groupBy('depenses.type_id')
+                ->get();
+            return $depenses;
 
         }
 
@@ -128,30 +143,41 @@ class Controller extends BaseController
         if($debut!=null && $fin==null){
             //debut
             $depenses = DB::table('depenses')
-            ->select(DB::raw("SUM(sommes) as sm"), 'types.designation')
-            ->whereDate('date', '=', $debut)
-            ->where('groupes.id','=',$categorie_id)
-            ->where('depenses.deleted_at','=',null)
-            ->join('types', 'types.id', '!=', 'depenses.type_id')
-            ->join('groupes', 'groupes.id', '=', 'types.groupe_id')
-            ->groupBy('depenses.type_id')
-            ->get();
-
-        }
-
-        else 
-        {
-                //rien
-            $depenses = DB::table('depenses')
-            ->select(DB::raw("SUM(sommes) as sm"), 'types.designation')
-                ->join('types', 'types.id', '=', 'depenses.type_id')
+                ->select(DB::raw("SUM(sommes) as sm"), 'types.designation')
+                ->whereDate('date', '=', $debut)
                 ->where('groupes.id','=',$categorie_id)
                 ->where('depenses.deleted_at','=',null)
-                ->join('types', 'types.id', '!=', 'depenses.type_id')
+                ->join('types', 'types.id', '=', 'depenses.type_id')
                 ->join('groupes', 'groupes.id', '=', 'types.groupe_id')
                 ->groupBy('depenses.type_id')
                 ->get();
 
-        }*/
+            return $depenses;
+        }
+
+        else 
+        {
+            //rien
+             $depenses = DB::table('depenses')
+                ->select(DB::raw("SUM(sommes) as sm"), 'types.designation')
+            
+                ->where('groupes.id','=',$categorie_id)
+                ->where('depenses.deleted_at','=',null)
+                ->join('types', 'types.id', '=', 'depenses.type_id')
+                ->join('groupes', 'groupes.id', '=', 'types.groupe_id')
+                ->groupBy('depenses.type_id')
+                ->get();
+
+                return $depenses;
+
+        }
     }
+
+    public function get_sous_categorie($categorie_id){
+        
+        return DB::table('types')
+            ->where('groupe_id','=',$categorie_id)
+            ->get();
+    }
+
 }
