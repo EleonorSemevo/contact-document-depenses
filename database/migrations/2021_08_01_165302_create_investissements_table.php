@@ -21,12 +21,12 @@ class CreateInvestissementsTable extends Migration
             $table->foreignId('localite_id')->constrained('localites')->onDelete('cascade');
             $table->date('date');
             $table->integer('numero_piece');
-            $table->integer('cout_intrant');
-            $table->integer('cout_main_oeuvre');
-            $table->integer('cout_transport');
+            $table->integer('cout_intrant')->nullable();;
+            $table->integer('cout_main_oeuvre')->nullable();;
+            $table->integer('cout_transport')->nullable();;
             $table->string('prestataire');
-            $table->string('mail');
-            $table->integer('telephone');
+            $table->string('mail')->nullable();;
+            $table->integer('telephone')->nullable();;
             $table->softDeletes();
             $table->timestamps();
         });

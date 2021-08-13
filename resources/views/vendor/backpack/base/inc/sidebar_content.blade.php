@@ -39,7 +39,8 @@
     <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon las la-store-alt"></i> Finances</a>
     <ul class="nav-dropdown-items">
         <li class="nav-item"><a class="nav-link" href="{{ backpack_url('depense') }}"><i class="nav-icon las la-coins"></i> <span>Dépenses</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="{{url('operation')}}"><i class="nav-icon la la-id-badge"></i> <span>Filtrer</span></a></li>
+       <!-- <li class="nav-item"><a class="nav-link" href="{{url('operation')}}"><i class="nav-icon la la-id-badge"></i> <span>Filtrer</span></a></li> 
+-->
         
         <li class="nav-item"><a class="nav-link" href="{{ url('operation/statistiques') }}"><i class="nav-icon las la-chart-area"></i> <span>Graphes</span></a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('pretespece') }}'><i class='nav-icon la la-question'></i> Pretespeces</a></li>

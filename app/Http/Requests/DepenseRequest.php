@@ -27,6 +27,7 @@ class DepenseRequest extends FormRequest
     {
         return [
             // 'name' => 'required|min:5|max:255'
+            'type_id' => 'required',
             'sommes' => 'required',
             'date' => 'required',
         ];

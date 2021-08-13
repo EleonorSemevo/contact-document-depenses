@@ -27,6 +27,12 @@ class InvestissementRequest extends FormRequest
     {
         return [
             // 'name' => 'required|min:5|max:255'
+            'domaine_id' => 'required',
+             'localite_id' => 'required',
+            'date' => 'required',
+            'numero_piece' => 'required',
+            'prestataire' => 'required',
+            
         ];
     }
 

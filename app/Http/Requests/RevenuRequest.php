@@ -27,6 +27,9 @@ class RevenuRequest extends FormRequest
     {
         return [
             // 'name' => 'required|min:5|max:255'
+            'typerevenu_id' => 'required',
+            'montant' => 'required',
+            'date' => 'required',
         ];
     }
 
