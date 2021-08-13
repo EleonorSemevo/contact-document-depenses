@@ -17,10 +17,10 @@ class CreateInvestissementsTable extends Migration
 
         Schema::create('investissements', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('domaine_id')->constrained('domaines')->onDelete('cascade');;
+            $table->foreignId('domaine_id')->constrained('domaines')->onDelete('cascade');
+            $table->foreignId('localite_id')->constrained('localites')->onDelete('cascade');
             $table->date('date');
             $table->integer('numero_piece');
-            $table->string('localite');
             $table->integer('cout_intrant');
             $table->integer('cout_main_oeuvre');
             $table->integer('cout_transport');

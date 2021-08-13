@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\InvestissementRequest;
+use App\Http\Requests\LocaliteRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
- * Class InvestissementCrudController
+ * Class LocaliteCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class InvestissementCrudController extends CrudController
+class LocaliteCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\InlineCreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
@@ -27,9 +26,9 @@ class InvestissementCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\Investissement::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/investissement');
-        CRUD::setEntityNameStrings('investissement', 'investissements');
+        CRUD::setModel(\App\Models\Localite::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/localite');
+        CRUD::setEntityNameStrings('localite', 'localites');
     }
 
     /**
@@ -40,16 +39,7 @@ class InvestissementCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('domaine_id');
-        CRUD::column('date');
-        CRUD::column('numero_piece');
-        CRUD::column('localite');
-        CRUD::column('cout_intrant');
-        CRUD::column('cout_main_oeuvre');
-        CRUD::column('cout_transport');
-        CRUD::column('prestataire');
-        CRUD::column('mail');
-        CRUD::column('telephone');
+        CRUD::column('nom');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -66,40 +56,15 @@ class InvestissementCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(InvestissementRequest::class);
+        CRUD::setValidation(LocaliteRequest::class);
 
-        CRUD::field('domaine_id');
-        CRUD::field('localite_id');
-        CRUD::field('date');
-        CRUD::field('numero_piece');
-        CRUD::field('cout_intrant');
-        CRUD::field('cout_main_oeuvre');
-        CRUD::field('cout_transport');
-        CRUD::field('prestataire');
-        CRUD::field('mail');
-        CRUD::field('telephone');
+        CRUD::field('nom');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');
          * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
          */
-            
-
-         $this->crud->modifyField("domaine_id",[
-              'label' => "Domaine",
-              'default' => strval($this->crud->getRequest()->input('id')),
-              'type' => 'select',
-              'name' => 'domaine_id',
-              'model' => "App\Models\Domaine",
-              'attribute' => 'nom',
-              'options'   => (function ($query) 
-              {
-                  $id = $this->crud->getRequest()->input('id');
-                return $query->orderBy('nom', 'ASC')->get();
-              
-    }),
-         ]);
     }
 
     /**

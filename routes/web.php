@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DepenseController;
 use App\Http\Controllers\DiagramController;
+use App\Http\Controllers\RapportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +41,5 @@ Route::post('/month',  [DepenseController::class, 'depenses_mois']);
 
 Route::get('/operation/statistiques', [DiagramController::class, 'index']);
 Route::post('/operation/statistiques', [DiagramController::class, 'index']);
+Route::get('/operation/rapport', [RapportController::class, 'index']);
+Route::post('/operation/rapport', [RapportController::class, 'index']);

@@ -58,5 +58,21 @@
     </ul>
 </li>
 
+<!--  -->
+<li class="nav-item nav-dropdown">
+    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon las la-store-alt"></i> Investissements  </a>
+    <ul class="nav-dropdown-items">
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('domaine') }}'><i class='nav-icon la la-question'></i> Immobilier</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('localite') }}'><i class='nav-icon la la-question'></i> Localites</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ url('operation/rapport') }}'><i class='nav-icon la la-question'></i> Rapports</a></li>
+    </ul>
+</li>
+
+
+<!--
+
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('domaine') }}'><i class='nav-icon la la-question'></i> Domaines</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('investissement') }}'><i class='nav-icon la la-question'></i> Invest immobilier</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('localite') }}'><i class='nav-icon la la-question'></i> Localites</a></li>
+
+-->
