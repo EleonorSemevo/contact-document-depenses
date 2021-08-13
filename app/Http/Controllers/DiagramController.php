@@ -48,6 +48,7 @@ class DiagramController extends Controller
         $s_categorie_values = $this->convert_to_int($s_categorie_values);
         //Pour le diagramme en batton
         $band_data = $this->getDepensesParMois();
+        $line_data = $this->getRevenusParMois();
 
          return View('diagram',
             [
@@ -63,6 +64,8 @@ class DiagramController extends Controller
                 'fin' => $fin,*/
                 'getDepensesParMois' => $this->getDepensesParMois(),
                 'band' => $chart->band($band_data),
+                'line_diagramm' =>$chart->line_diagramm($line_data),
+                'revenus' =>$this->getRevenusParMois(),
                
         ]);
 

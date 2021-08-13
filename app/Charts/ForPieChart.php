@@ -46,4 +46,17 @@ class ForPieChart
 
             return $dt;
     }
+
+    public function line_diagramm($line_data): \ArielMejiaDev\LarapexCharts\LineChart
+    {
+        $lc= $this->chart->lineChart()
+            ->setTitle('Sales during 2021.')
+            ->setSubtitle('Physical sales vs Digital sales.')
+            ->setXAxis(['Jan', 'Fev', 'Mars', 'Avr', 'Mai', 'Ju','Juil','Août','Sept','Oct','Nov','Dec']);
+         foreach($line_data as $line_value)
+            {
+                 $lc->addData($line_value['titre'],$line_value['values']);
+            }
+        return $lc;
+    }
 }

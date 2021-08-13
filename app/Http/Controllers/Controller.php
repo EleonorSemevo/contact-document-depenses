@@ -237,7 +237,22 @@ class Controller extends BaseController
     }
 
     public function getRevenusParMois(){
+        $actuelle_annee = date("Y"); 
 
+        $revenus = DB::table('revenus')
+        ->select(DB::raw("SUM(montant) as sm"),
+        DB::raw("strftime('%m', revenus.date) as month" ),
+        DB::raw("strftime('%Y', revenus.date) as year"),
+        'typerevenus.nom')
+        ->whereYear('revenus.date', $actuelle_annee)
+        ->where('revenus.deleted_at','=',null)
+        ->join('typerevenus', 'typerevenus.id', '=', 'revenus.typerevenu_id')
+        ->groupBy('month')
+        ->get();
+
+        //$rl= $this->helper->arranger_pour_line_chart();
+        return $this->helper->arranger_pour_line_chart($this->getDepensesParMois(), $revenus);
+        
     }
 
     public function getInvestissementParMmois(){

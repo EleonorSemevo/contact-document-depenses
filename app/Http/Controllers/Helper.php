@@ -205,5 +205,69 @@ class Helper
 
     }
 
+    public function arranger_pour_line_chart($depenses,$revenus)
+    {
+        ///arrange la requette des sous catégories de telles maniere qu'elle puissu être itérée sur le chart
+        $general = $depenses;
+        /*foreach ($depenses as $dep)
+        {
+            //prendres toutes ses valeurs
+            $v = $this->getvalues_depenses($depenses,$dep);
+            //l'arranger
+
+            //stocer dans general
+            array_push($general,array(
+                'titre'=>$dep->designation,
+                'values'=> $v
+            ));
+        }
+
+        foreach ($investissements as $invest)
+        {
+            //prendres toutes ses valeurs
+            $in = $this->getvalues_investissement($investissements,$invest);
+            //l'arranger
+
+            //stocer dans general
+            array_push($general,array(
+                'titre'=>$invest->nom,
+                'values'=> $in
+            ));
+        }*/
+        
+            //prendres toutes ses valeurs
+            $rev = $this->getvalues_revenus($revenus);
+            //l'arranger
+
+            //stocer dans general
+            array_push($general,array(
+                'titre'=>'revenus',
+                'values'=> $rev
+            ));
+        
+        return $general;
+    }
+    
+     public function getvalues_revenus($revenus)
+     {
+        $table = [];
+        for($i=0;$i<12;$i++){
+            foreach($revenus as $rev)
+            {
+                if ($rev->month ==$i ){
+                    array_push($table, $rev->sm );
+                    break;
+                }
+
+            }
+            if(array_key_last($table)!=$i){
+                 array_push($table, 0);
+            }
+        }
+        return $table;
+
+     }
+
+
     
 }
