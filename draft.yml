@@ -1,25 +1,24 @@
 models:
-  Models\Localite:
-    nom: string
+  Models\EmprunterDoc:
+    date: date
+    date_prevue: date nullable
+    date_reelle: date nullable
+    creancier: string
+    motif: string nullable
+    observation: longtext nullable
+    titre: string
+    sous_titre: string nullable
+    auteur: string
+    co_auteur: string nullable
+    ISBN: integer nullable
+    mots_cles: longtext nullable
+    resume: longtext nullable
+    annee_edition: year nullable
+    ville_edition: string nullable
+    lieu_edition: string nullable
+    nombre_page: integer nullable
+    pp: string nullable
+    editeur: string nullable
+    edition: string nullable
     timestamps: true
     softDeletes: true
-
-
-
-
-  
-  
-  
- 
-
-
-  
-  
-
-   
-
-
-
-
-
-    

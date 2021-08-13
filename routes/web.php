@@ -43,3 +43,8 @@ Route::get('/operation/statistiques', [DiagramController::class, 'index']);
 Route::post('/operation/statistiques', [DiagramController::class, 'index']);
 Route::get('/operation/rapport', [RapportController::class, 'index']);
 Route::post('/operation/rapport', [RapportController::class, 'index']);
+
+Route::get('/clear-cache', function() {
+    Artisan::call('cache:clear');
+    return "Cache is cleared";
+});

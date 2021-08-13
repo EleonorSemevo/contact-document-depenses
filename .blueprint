@@ -1,7 +1,7 @@
 created:
-    - database/factories/Models/LocaliteFactory.php
-    - database/migrations/2021_08_13_163155_create_localites_table.php
-    - app/Models/Localite.php
+    - database/factories/Models/EmprunterDocFactory.php
+    - database/migrations/2021_08_13_223031_create_emprunter_docs_table.php
+    - app/Models/EmprunterDoc.php
 models:
     Models\Document: { categorie_id: 'id foreign:categories', langue_id: 'id foreign:langues', titre: string, sous_titre: 'string nullable', auteur: string, co_auteur: 'string nullable', ISBN: 'integer nullable', mots_cles: 'longtext nullable', resume: 'string nullable', annee_edition: 'year nullable', ville_edition: 'string nullable', lieu_edition: 'string nullable', nombre_page: 'integer nullable', pp: 'string nullable', editeur: 'string nullable', edition: 'string nullable', timestamps: timestamps, softdeletes: softDeletes }
     Models\Categorie: { titre: string, timestamps: timestamps, softdeletes: softDeletes }
@@ -11,3 +11,4 @@ models:
     Models\Depense: { type_id: 'id foreign:types', sommes: integer, date: date, timestamps: timestamps, softdeletes: softDeletes }
     Models\Investissement: { domaine_id: 'id foreign:domaines', date: date, numero_piece: integer, localite: string, cout_intrant: integer, cout_main_oeuvre: integer, cout_transport: integer, prestataire: string, mail: string, telephone: integer, timestamps: timestamps, softdeletes: softDeletes }
     Models\Localite: { nom: string, timestamps: timestamps, softdeletes: softDeletes }
+    Models\EmprunterDoc: { date: date, date_prevue: 'date nullable', date_reelle: 'date nullable', creancier: string, motif: 'string nullable', observation: 'longtext nullable', titre: string, sous_titre: 'string nullable', auteur: string, co_auteur: 'string nullable', ISBN: 'integer nullable', mots_cles: 'longtext nullable', resume: 'longtext nullable', annee_edition: 'year nullable', ville_edition: 'string nullable', lieu_edition: 'string nullable', nombre_page: 'integer nullable', pp: 'string nullable', editeur: 'string nullable', edition: 'string nullable', timestamps: timestamps, softdeletes: softDeletes }

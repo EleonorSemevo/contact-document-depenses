@@ -22,11 +22,11 @@
 <li class="nav-item nav-dropdown">
     <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon las la-store-alt"></i> Documents </a>
     <ul class="nav-dropdown-items">
-        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('categorie') }}'><i class='nav-icon la la-question'></i> Categories</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('categorie') }}'><i class='nav-icon las la-school'></i> Categories</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('langue') }}'><i class='nav-icon la la-question'></i> Langues</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('document') }}'><i class='nav-icon las la-folder'></i> Documents</a></li>
-        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('empruntdoc') }}'><i class='nav-icon la la-question'></i> Empruntdocs</a></li>
-        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('pretdoc') }}'><i class='nav-icon la la-question'></i> Pretdocs</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('emprunterdoc') }}'><i class='nav-icon las la-address-book'></i> Emprunt de Docs</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('pretdoc') }}'><i class='nav-icon las la-columns'></i> Prêt de docs</a></li>
     </ul>
 </li>
 @if(backpack_user()->hasRole('administration'))
@@ -42,9 +42,9 @@
        <!-- <li class="nav-item"><a class="nav-link" href="{{url('operation')}}"><i class="nav-icon la la-id-badge"></i> <span>Filtrer</span></a></li> 
 -->
         
-        <li class="nav-item"><a class="nav-link" href="{{ url('operation/statistiques') }}"><i class="nav-icon las la-chart-area"></i> <span>Graphes</span></a></li>
-        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('pretespece') }}'><i class='nav-icon la la-question'></i> Pretespeces</a></li>
-        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('empruntespece') }}'><i class='nav-icon la la-question'></i> Empruntespeces</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url('operation/statistiques') }}"><i class="nav-icon las la-chart-bar"></i> <span>Graphes</span></a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('pretespece') }}'><i class='nav-icon las la-balance-scale-left'></i> Prêts</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('empruntespece') }}'><i class='nav-icon las la-briefcase'></i> Emprunts</a></li>
     </ul>
 </li>
 
@@ -54,18 +54,19 @@
 <li class="nav-item nav-dropdown">
     <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon las la-store-alt"></i> Revenus  </a>
     <ul class="nav-dropdown-items">
-        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('revenu') }}'><i class='nav-icon la la-question'></i> Revenus</a></li>
-        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('typerevenu') }}'><i class='nav-icon la la-question'></i> Typerevenus</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('revenu') }}'><i class='nav-icon las la-wallet'></i> Revenus</a></li>
+       <!-- <li class='nav-item'><a class='nav-link' href='{{ backpack_url('typerevenu') }}'><i class='nav-icon la la-question'></i> Typerevenus</a></li>
+-->
     </ul>
 </li>
 
 <!--  -->
 <li class="nav-item nav-dropdown">
-    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon las la-store-alt"></i> Investissements  </a>
+    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon las la-store-alt"></i> Investissements mmobilier  </a>
     <ul class="nav-dropdown-items">
-        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('domaine') }}'><i class='nav-icon la la-question'></i> Immobilier</a></li>
-        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('localite') }}'><i class='nav-icon la la-question'></i> Localites</a></li>
-        <li class='nav-item'><a class='nav-link' href='{{ url('operation/rapport') }}'><i class='nav-icon la la-question'></i> Rapports</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('localite') }}'><i class='nav-icon las la-bezier-curve'></i> Localites</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('domaine') }}'><i class='nav-icon las la-kaaba'></i> imobilier</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ url('operation/rapport') }}'><i class='nav-icon las la-store'></i> Rapports</a></li>
     </ul>
 </li>
 
