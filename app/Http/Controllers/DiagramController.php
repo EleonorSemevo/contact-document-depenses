@@ -36,9 +36,15 @@ class DiagramController extends Controller
         //Pour les sous categorie catégories
         $sous_categorie = $this->depenses_par_sous_categorie($debut,$fin,$categorie_id);
         $s_categorie_names = $this->getArray($sous_categorie, 'designation');
-        $s_categorie_names = $this->mettre_nom_depense_avec_investissement($s_categorie_names,$this->get_investissement($debut,$fin));
+      //  $s_categorie_names = $this->mettre_nom_depense_avec_investissement($s_categorie_names,$this->get_investissement($debut,$fin));
         $s_categorie_values = $this->getArray($sous_categorie, 'sm');
-        $s_categorie_values = $this->mettre_value_depense_avec_investissement($s_categorie_values,$this->get_investissement($debut,$fin));
+       // $s_categorie_values = $this->mettre_value_depense_avec_investissement($s_categorie_values,$this->get_investissement($debut,$fin));
+        
+        if($categorie_id=='investissement')
+        {
+            $s_categorie_names = $this->mettre_nom_depense_avec_investissement($s_categorie_names,$this->get_investissement($debut,$fin));
+            $s_categorie_values = $this->mettre_value_depense_avec_investissement($s_categorie_values,$this->get_investissement($debut,$fin));
+        }
         $s_categorie_values = $this->convert_to_int($s_categorie_values);
 
 
@@ -51,9 +57,9 @@ class DiagramController extends Controller
                 'sous_categorie' => $this->get_sous_categorie($categorie_id),
                 'categorie_id' => $categorie_id,
                 ///investissement
-                'investissement'=> $this->get_investissement($debut, $fin),
+                /*'investissement'=> $this->get_investissement($debut, $fin),
                 'debut' => $debut,
-                'fin' => $fin,
+                'fin' => $fin,*/
                
         ]);
 
