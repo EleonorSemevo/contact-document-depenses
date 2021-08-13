@@ -12,13 +12,13 @@ use DB;
 use Carbon\Carbon;
 use App\Http\Controllers\Helper;
 
-class Controller extends BaseController
+class StatistiqueController extends Helper
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    
     
     protected $helper;
     public function __construct(Helper $helper){
-        $this->helper = $helper;
+        $this->header = $helper;
     }
 
     public function depense__par_categorie_totales($debut, $fin){
@@ -44,7 +44,7 @@ class Controller extends BaseController
         else 
         {
             //rien
-            $depenses = $this->helper->get_depenses_categorie();
+            $depenses = $this->$helper->get_depenses_categorie();
         }
 
         return $depenses;
@@ -53,8 +53,6 @@ class Controller extends BaseController
 
     public function getArray($table, $attribut){
         $table_array=[];
-        if($table==null)
-            return [];
         foreach($table as $t)
         {
             array_push($table_array, $t->$attribut);
@@ -77,26 +75,45 @@ class Controller extends BaseController
     }
 
     public function depenses_par_sous_categorie($debut,$fin,$categorie_id){
-        if($categorie_id==null || $categorie_id==-1)
-        {
-            return $this->helper->get_sous_categorie();
-        }
-        elseif($categorie_id=='investissement')
-        {
-            return null;
-        }
-        
-        if($debut != null && $fin != null){
+         if($debut != null && $fin != null){
                 //les deux
-            $depenses = $this->helper->get_sous_cat_fixe_between($debut, $fin, $categorie_id);
+                $depenses = DB::table('depenses')
+                ->select(DB::raw("SUM(sommes) as sm"), 'types.designation')
+                ->whereBetween('depenses.date', [$debut, $fin])
+                ->where('groupes.id','=',$categorie_id)
+                ->where('depenses.deleted_at','=',null)
+                ->join('types', 'types.id', '=', 'depenses.type_id')
+                ->join('groupes', 'groupes.id', '=', 'types.groupe_id')
+                ->groupBy('depenses.type_id')
+                ->get();
 
-            return $depenses;
+                return $depenses;
         }
 
         else if ($debut ==null && $fin!=null) {
 
-            
-            $depenses = $this->helper->get_sous_cat_fixe_at($fin, $categorie_id);
+            //fin 
+            /*$depenses = DB::table('depenses')
+            ->select(DB::raw("SUM(sommes) as sm"), 'types.designation' )
+            ->whereDate('date', '=', $fin)
+            ->where('groupes.id','=',$categorie_id)
+            ->where('depenses.deleted_at','=',null)
+            ->join('types', 'types.id', '!=', 'depenses.type_id')
+            ->join('groupes', 'groupes.id', '=', 'types.groupe_id')
+            ->groupBy('depenses.type_id')
+            ->get();
+            */
+
+            $depenses = DB::table('depenses')
+                ->select(DB::raw("SUM(sommes) as sm"), 'types.designation')
+                ->where('groupes.id','=',$categorie_id)
+                ->whereDate('depenses.date','=',$fin)
+                ->where('groupes.id','=',$categorie_id)
+                ->where('depenses.deleted_at','=',null)
+                ->join('types', 'types.id', '=', 'depenses.type_id')
+                ->join('groupes', 'groupes.id', '=', 'types.groupe_id')
+                ->groupBy('depenses.type_id')
+                ->get();
             return $depenses;
 
         }
@@ -104,7 +121,15 @@ class Controller extends BaseController
         else
         if($debut!=null && $fin==null){
             //debut
-            $depenses = $this->helper->get_sous_cat_fixe_at($debut, $categorie_id);
+            $depenses = DB::table('depenses')
+                ->select(DB::raw("SUM(sommes) as sm"), 'types.designation')
+                ->whereDate('depenses.date', '=', $debut)
+                ->where('groupes.id','=',$categorie_id)
+                ->where('depenses.deleted_at','=',null)
+                ->join('types', 'types.id', '=', 'depenses.type_id')
+                ->join('groupes', 'groupes.id', '=', 'types.groupe_id')
+                ->groupBy('depenses.type_id')
+                ->get();
 
             return $depenses;
         }
@@ -112,7 +137,16 @@ class Controller extends BaseController
         else 
         {
             //rien
-             $depenses =  $this->helper->get_all_sous_categorie($categorie_id);
+             $depenses = DB::table('depenses')
+                ->select(DB::raw("SUM(sommes) as sm"), 'types.designation')
+            
+                ->where('groupes.id','=',$categorie_id)
+                ->where('depenses.deleted_at','=',null)
+                ->join('types', 'types.id', '=', 'depenses.type_id')
+                ->join('groupes', 'groupes.id', '=', 'types.groupe_id')
+                ->groupBy('depenses.type_id')
+                ->get();
+
                 return $depenses;
 
         }

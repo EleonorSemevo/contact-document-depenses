@@ -16,9 +16,14 @@ class DiagramController extends Controller
 {
     public function index(ForPieChart $chart, DiagramRequest $request)
     {
-        $debut = $request->input('debut');
-        $fin = $request->input('fin');
-        $categorie_id = intval($request->input('categorie'),10);
+        $debut = $request->input('date-debut');
+        $fin = $request->input('date-fin');
+         $categorie_id = $request->input('categorie'); 
+        if ($categorie_id!=null && $categorie_id!='investissement')
+        {
+            $categorie_id = intval($categorie_id,10);
+        }
+        
 
         //dépenses par catégorie
         $depenses = $this->depense__par_categorie_totales($debut, $fin);
@@ -31,7 +36,9 @@ class DiagramController extends Controller
         //Pour les sous categorie catégories
         $sous_categorie = $this->depenses_par_sous_categorie($debut,$fin,$categorie_id);
         $s_categorie_names = $this->getArray($sous_categorie, 'designation');
+        $s_categorie_names = $this->mettre_nom_depense_avec_investissement($s_categorie_names,$this->get_investissement($debut,$fin));
         $s_categorie_values = $this->getArray($sous_categorie, 'sm');
+        $s_categorie_values = $this->mettre_value_depense_avec_investissement($s_categorie_values,$this->get_investissement($debut,$fin));
         $s_categorie_values = $this->convert_to_int($s_categorie_values);
 
 
@@ -44,7 +51,9 @@ class DiagramController extends Controller
                 'sous_categorie' => $this->get_sous_categorie($categorie_id),
                 'categorie_id' => $categorie_id,
                 ///investissement
-                'investissement'=> $this->get_investissement("",""),
+                'investissement'=> $this->get_investissement($debut, $fin),
+                'debut' => $debut,
+                'fin' => $fin,
                
         ]);
 
