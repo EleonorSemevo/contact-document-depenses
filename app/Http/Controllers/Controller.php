@@ -201,6 +201,7 @@ class Controller extends BaseController
 
     public function get_all_sous_categorie()
     {
+
          $depenses = DB::table('depenses')
                 ->select(DB::raw("SUM(sommes) as sm"), 'types.designation')
                 ->whereDate('depenses.date','=',$fin)
@@ -211,6 +212,50 @@ class Controller extends BaseController
                 ->groupBy('depenses.type_id')
                 ->get();
             return $depenses;
+    }
+
+    public function getDepensesParMois(){
+        $actuelle_annee = date("Y"); 
+
+        $depenses_month = DB::table('depenses')->select(
+            DB::raw("SUM(sommes) as sm"),
+            DB::raw("strftime('%m', depenses.date) as month" ),
+            DB::raw("strftime('%Y', depenses.date) as year"),
+             'types.designation'
+        )
+        ->where('depenses.deleted_at','=',null)
+        ->where('year', '=', "$actuelle_annee")
+        ->join('types', 'types.id', '=', 'depenses.type_id')
+        ->join('groupes', 'groupes.id', '=', 'types.groupe_id')
+        ->groupby('month','depenses.type_id')
+        ->get();
+
+       
+        //return $depenses_month;
+        return $this->helper->arranger($depenses_month, $this->getInvestissementParMmois());
+
+    }
+
+    public function getRevenusParMois(){
+
+    }
+
+    public function getInvestissementParMmois(){
+        $actuelle_annee = date("Y"); 
+
+        $investissements = DB::table('investissements')
+                ->select(DB::raw("SUM(cout_intrant) as intrant"),
+                DB::raw("SUM(cout_main_oeuvre) as oeuvre"),
+                DB::raw("SUM(cout_transport) as transport"),
+                DB::raw("strftime('%m', investissements.date) as month" ),
+                DB::raw("strftime('%Y', investissements.date) as year"),
+                'domaines.nom')
+                ->where('year', '=', "$actuelle_annee")
+                ->where('investissements.deleted_at','=',null)
+                ->join('domaines', 'domaines.id', '=', 'investissements.domaine_id')
+                ->groupBy('month','investissements.domaine_id')
+                ->get();
+        return $investissements;
     }
 
 }

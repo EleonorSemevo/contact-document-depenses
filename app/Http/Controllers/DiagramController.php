@@ -46,7 +46,8 @@ class DiagramController extends Controller
             $s_categorie_values = $this->mettre_value_depense_avec_investissement($s_categorie_values,$this->get_investissement($debut,$fin));
         }
         $s_categorie_values = $this->convert_to_int($s_categorie_values);
-
+        //Pour le diagramme en batton
+        $band_data = $this->getDepensesParMois();
 
          return View('diagram',
             [
@@ -60,6 +61,8 @@ class DiagramController extends Controller
                 /*'investissement'=> $this->get_investissement($debut, $fin),
                 'debut' => $debut,
                 'fin' => $fin,*/
+                'getDepensesParMois' => $this->getDepensesParMois(),
+                'band' => $chart->band($band_data),
                
         ]);
 

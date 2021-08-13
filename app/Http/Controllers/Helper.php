@@ -110,5 +110,100 @@ class Helper
         return $depenses;
     }
 
+   /* public function array_data_en_mois_arrange($depenses){
+        
+        $table= [];
+        for($i=0;$i<12;$i++){
+            foreach($depenses as $dep)
+            {
+                if ($dep->month ==$i){
+                    array_push($table, $dep->sm);
+                    break;
+                }
+
+            }
+            if(array_key_last($table)!=$i){
+                 array_push($table, 0);
+            }
+        }
+        return $table;
+    }*/
+
+    public function getvalues_depenses($depenses, $dep)
+    {
+        $table = [];
+        for($i=0;$i<12;$i++){
+            foreach($depenses as $depense)
+            {
+                if ($depense->month ==$i && $depense->designation == $dep->designation){
+                    array_push($table, $depense->sm);
+                    break;
+                }
+
+            }
+            if(array_key_last($table)!=$i){
+                 array_push($table, 0);
+            }
+        }
+        return $table;
+
+
+    }
+    
+
+    public function arranger($depenses,$investissements)
+    {
+        ///arrange la requette des sous catégories de telles maniere qu'elle puissu être itérée sur le chart
+        $general = [];
+        foreach ($depenses as $dep)
+        {
+            //prendres toutes ses valeurs
+            $v = $this->getvalues_depenses($depenses,$dep);
+            //l'arranger
+
+            //stocer dans general
+            array_push($general,array(
+                'titre'=>$dep->designation,
+                'values'=> $v
+            ));
+        }
+
+        foreach ($investissements as $invest)
+        {
+            //prendres toutes ses valeurs
+            $in = $this->getvalues_investissement($investissements,$invest);
+            //l'arranger
+
+            //stocer dans general
+            array_push($general,array(
+                'titre'=>$invest->nom,
+                'values'=> $in
+            ));
+        }
+
+       return $general;
+    }
+
+     public function getvalues_investissement($investissements, $invest)
+    {
+        $table = [];
+        for($i=0;$i<12;$i++){
+            foreach($investissements as $inv)
+            {
+                if ($inv->month ==$i && $inv->nom == $invest->nom){
+                    array_push($table, $inv->intrant +$inv->oeuvre + $inv->transport );
+                    break;
+                }
+
+            }
+            if(array_key_last($table)!=$i){
+                 array_push($table, 0);
+            }
+        }
+        return $table;
+
+
+    }
+
     
 }
