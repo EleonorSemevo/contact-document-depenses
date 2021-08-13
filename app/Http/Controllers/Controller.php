@@ -180,4 +180,78 @@ class Controller extends BaseController
             ->get();
     }
 
+    public function get_investissement($debut,$fin){
+
+        if($debut!=null && $fin!=null)
+        {
+           $investissements = DB::table('investissements')
+                ->select(DB::raw("SUM(cout_intrant) as intrant"),
+                    DB::raw("SUM(cout_main_oeuvre) as oeuvre"),
+                    DB::raw("SUM(cout_transport) as transport"),
+                     'domaines.nom')
+                ->where('investissements.deleted_at','=',null)
+                ->whereBetween('investissements.date', [$debut, $fin])
+                ->join('domaines', 'domaines.id', '=', 'investissements.domaine_id')
+                ->groupBy('investissements.domaine_id')
+                ->get();
+        }
+        elseif ($debut!=null && $fin==null)
+        {
+            $investissements = DB::table('investissements')
+                ->select(DB::raw("SUM(cout_intrant) as intrant"),
+                    DB::raw("SUM(cout_main_oeuvre) as oeuvre"),
+                    DB::raw("SUM(cout_transport) as transport"),
+                     'domaines.nom')
+                ->where('investissements.deleted_at','=',null)
+                ->whereDate('investissements.date', '=', $debut)
+                ->join('domaines', 'domaines.id', '=', 'investissements.domaine_id')
+                ->groupBy('investissements.domaine_id')
+                ->get();
+        }
+        elseif ($debut=null && $fin!=null)
+        {
+            $investissements = DB::table('investissements')
+                ->select(DB::raw("SUM(cout_intrant) as intrant"),
+                    DB::raw("SUM(cout_main_oeuvre) as oeuvre"),
+                    DB::raw("SUM(cout_transport) as transport"),
+                     'domaines.nom')
+                ->where('investissements.deleted_at','=',null)
+                ->whereDate('investissements.date', '=', $fin)
+                ->join('domaines', 'domaines.id', '=', 'investissements.domaine_id')
+                ->groupBy('investissements.domaine_id')
+                ->get();
+        }
+        else 
+        {
+            $investissements = DB::table('investissements')
+                ->select(DB::raw("SUM(cout_intrant) as intrant"),
+                    DB::raw("SUM(cout_main_oeuvre) as oeuvre"),
+                    DB::raw("SUM(cout_transport) as transport"),
+                     'domaines.nom')
+                ->where('investissements.deleted_at','=',null)
+                ->join('domaines', 'domaines.id', '=', 'investissements.domaine_id')
+                ->groupBy('investissements.domaine_id')
+                ->get();
+        }
+
+         
+        return $investissements;
+    }
+
+    public function mettre_nom_depense_avec_investissement($nom_depenses, $investissements){
+        foreach ($investissements as $inv )
+        {
+           array_push($nom_depenses, $inv->nom);
+        }
+        return $nom_depenses;
+    }
+
+    public function mettre_value_depense_avec_investissement($valeur_depenses, $investissements){
+        foreach ($investissements as $inv )
+        {
+           array_push($valeur_depenses, $inv->intrant + $inv->oeuvre+ $inv->transport);
+        }
+        return $valeur_depenses;
+    }
+
 }

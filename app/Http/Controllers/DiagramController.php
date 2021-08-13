@@ -23,8 +23,10 @@ class DiagramController extends Controller
         //dépenses par catégorie
         $depenses = $this->depense__par_categorie_totales($debut, $fin);
         $data = $this->getArray($depenses, 'sm');
+        $data = $this->mettre_value_depense_avec_investissement($data, $this->get_investissement($debut,$fin));
         $data_get = $this->convert_to_int($data);
         $names=  $this->getArray($depenses, 'nom');
+        $names = $this->mettre_nom_depense_avec_investissement($names, $this->get_investissement($debut,$fin));
 
         //Pour les sous categorie catégories
         $sous_categorie = $this->depenses_par_sous_categorie($debut,$fin,$categorie_id);
@@ -41,6 +43,8 @@ class DiagramController extends Controller
                 //'s_categorie_chart' => $chart->build([100,200], ["mmm","llll"]),
                 'sous_categorie' => $this->get_sous_categorie($categorie_id),
                 'categorie_id' => $categorie_id,
+                ///investissement
+                'investissement'=> $this->get_investissement("",""),
                
         ]);
 
