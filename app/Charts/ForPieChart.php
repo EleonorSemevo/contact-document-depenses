@@ -17,7 +17,7 @@ class ForPieChart
     {
        $data = $names;
         return $this->chart->pieChart()
-            ->setTitle('Les dépenses')
+            ->setTitle('Dépenses')
             ->addData($data_get)
             ->setLabels($names);
     }
@@ -33,8 +33,8 @@ class ForPieChart
             ->setXAxis(['Jan', 'Fev', 'Mars', 'Avr', 'Mai', 'Ju','Juil','Août','Sept','Oct','Nov','Dec']);
             */
              $dt = $this->chart->barChart()
-            ->setTitle('San Francisco vs Boston.')
-            ->setSubtitle('Wins during season 2021.')
+            ->setTitle('Dépenses et revenus')
+            ->setSubtitle("Année ".date('Y'))
             ->setXAxis(['Jan', 'Fev', 'Mars', 'Avr', 'Mai', 'Ju','Juil','Août','Sept','Oct','Nov','Dec']);
 
             foreach($band_data as $band_value)
@@ -50,8 +50,8 @@ class ForPieChart
     public function line_diagramm($line_data): \ArielMejiaDev\LarapexCharts\LineChart
     {
         $lc= $this->chart->lineChart()
-            ->setTitle('Sales during 2021.')
-            ->setSubtitle('Physical sales vs Digital sales.')
+            ->setTitle('Dépenses et revenus')
+            ->setSubtitle("Année ".date('Y'))
             ->setXAxis(['Jan', 'Fev', 'Mars', 'Avr', 'Mai', 'Ju','Juil','Août','Sept','Oct','Nov','Dec']);
          foreach($line_data as $line_value)
             {
