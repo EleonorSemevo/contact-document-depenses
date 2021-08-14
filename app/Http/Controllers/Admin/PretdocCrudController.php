@@ -39,6 +39,8 @@ class PretdocCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+
+        
         CRUD::column('document_id');
         CRUD::column('date');
         CRUD::column('date_prevue');

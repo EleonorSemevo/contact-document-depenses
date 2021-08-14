@@ -22,6 +22,7 @@ class CreatePretespecesTable extends Migration
             $table->date('date_prevue')->nullable();
             $table->date('date_reelle')->nullable();
             $table->longText('obervation')->nullable();
+             $table->text('status')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

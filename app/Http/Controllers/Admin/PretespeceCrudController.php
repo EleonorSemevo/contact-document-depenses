@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\PretespeceRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use App\Models\Pretespece;
 
 /**
  * Class PretespeceCrudController
@@ -39,6 +40,69 @@ class PretespeceCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        $docs = Pretespece::all();
+        foreach($docs as $doc)
+        {
+            if($doc->date_reelle==null)
+            {
+                    if($doc->date_prevue >=  date('Y-m-d H:i:s'))
+                {
+                    $doc->status = "En cours";
+                    $doc->save();
+                }
+                else if($doc->date_prevue <  date('Y-m-d H:i:s'))
+                {
+                    $doc->status = "En retard";
+                    $doc->save();
+                }
+
+            }
+            else
+            {
+                    $doc->status = "Payé";
+                    $doc->save();
+            }
+
+        }
+
+
+
+
+        //CRUD::column('status')->type('text');
+        $this->crud->addColumn([
+  // Select
+  'label'     => 'Status',
+  'type'      => 'text',
+  'name'      => 'status', // the db column for the foreign key
+  //'entity'    => 'Pretespece', // the method that defines the relationship in your Model
+  'attribute' => 'status', // foreign key attribute that is shown to user
+  'wrapper'   => [
+       'element' => 'span', // the element will default to "a" so you can skip it here
+       
+       'class' =>  function ($crud, $column, $entry, $related_key){
+            if ($column['text'] == 'En retard')
+            {
+                return 'badge bg-danger';
+            }
+            else if($column['text'] == 'En cours')
+            {
+                return 'badge bg-warning';
+            }
+            else if ($column['text'] == 'Payé')
+            {
+                return 'badge bg-success';
+            }
+       },
+      'style' => 'padding-top: 0.6rem; padding-bottom: 0.6rem; padding-right: 1rem;
+      padding-left: 1rem; ',
+      
+      /*'href' => function ($crud, $column, $entry, $related_key) {
+          return backpack_url('article/'.$related_key.'/show');
+      },*/
+      // 'target' => '_blank',
+      // 'class' => 'some-class',
+  ],
+]);
         CRUD::column('date');
         CRUD::column('debiteur');
         CRUD::column('montant');
@@ -46,6 +110,7 @@ class PretespeceCrudController extends CrudController
         CRUD::column('date_prevue');
         CRUD::column('date_reelle');
         CRUD::column('obervation');
+        
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
