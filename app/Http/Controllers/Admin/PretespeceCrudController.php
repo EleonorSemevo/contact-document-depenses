@@ -29,7 +29,7 @@ class PretespeceCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Pretespece::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/pretespece');
-        CRUD::setEntityNameStrings('pretespece', 'pretespeces');
+        CRUD::setEntityNameStrings('pretespece', 'prets');
     }
 
     /**
@@ -70,39 +70,39 @@ class PretespeceCrudController extends CrudController
 
         //CRUD::column('status')->type('text');
         $this->crud->addColumn([
-  // Select
-  'label'     => 'Status',
-  'type'      => 'text',
-  'name'      => 'status', // the db column for the foreign key
-  //'entity'    => 'Pretespece', // the method that defines the relationship in your Model
-  'attribute' => 'status', // foreign key attribute that is shown to user
-  'wrapper'   => [
-       'element' => 'span', // the element will default to "a" so you can skip it here
-       
-       'class' =>  function ($crud, $column, $entry, $related_key){
-            if ($column['text'] == 'En retard')
-            {
-                return 'badge bg-danger';
-            }
-            else if($column['text'] == 'En cours')
-            {
-                return 'badge bg-warning';
-            }
-            else if ($column['text'] == 'Payé')
-            {
-                return 'badge bg-success';
-            }
-       },
-      'style' => 'padding-top: 0.6rem; padding-bottom: 0.6rem; padding-right: 1rem;
-      padding-left: 1rem; ',
-      
-      /*'href' => function ($crud, $column, $entry, $related_key) {
-          return backpack_url('article/'.$related_key.'/show');
-      },*/
-      // 'target' => '_blank',
-      // 'class' => 'some-class',
-  ],
-]);
+        // Select
+            'label'     => 'Status',
+            'type'      => 'text',
+            'name'      => 'status', // the db column for the foreign key
+            //'entity'    => 'Pretespece', // the method that defines the relationship in your Model
+            'attribute' => 'status', // foreign key attribute that is shown to user
+            'wrapper'   => [
+            'element' => 'span', // the element will default to "a" so you can skip it here
+            
+            'class' =>  function ($crud, $column, $entry, $related_key){
+                    if ($column['text'] == 'En retard')
+                    {
+                        return 'badge bg-danger';
+                    }
+                    else if($column['text'] == 'En cours')
+                    {
+                        return 'badge bg-warning';
+                    }
+                    else if ($column['text'] == 'Payé')
+                    {
+                        return 'badge bg-success';
+                    }
+            },
+            'style' => 'padding-top: 0.6rem; padding-bottom: 0.6rem; padding-right: 1rem;
+            padding-left: 1rem; ',
+            
+            /*'href' => function ($crud, $column, $entry, $related_key) {
+                return backpack_url('article/'.$related_key.'/show');
+            },*/
+            // 'target' => '_blank',
+            // 'class' => 'some-class',
+        ],
+        ]);
         CRUD::column('date');
         CRUD::column('debiteur');
         CRUD::column('montant');

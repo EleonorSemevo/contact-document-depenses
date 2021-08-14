@@ -24,6 +24,7 @@ class CreatePretdocsTable extends Migration
             $table->date('date_reelle')->nullable();
             $table->longText('observation')->nullable();
             $table->boolean('rendu')->nullable();
+            $table->text('status')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

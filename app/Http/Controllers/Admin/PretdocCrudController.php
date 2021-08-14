@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\PretdocRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use App\Models\Pretdoc;
 
 /**
  * Class PretdocCrudController
@@ -28,7 +29,7 @@ class PretdocCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Pretdoc::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/pretdoc');
-        CRUD::setEntityNameStrings('pretdoc', 'pretdocs');
+        CRUD::setEntityNameStrings('pretdoc', 'prêt de documents');
     }
 
     /**
@@ -40,7 +41,65 @@ class PretdocCrudController extends CrudController
     protected function setupListOperation()
     {
 
-        
+        $docs = Pretdoc::all();
+       foreach($docs as $doc)
+        {
+            if($doc->date_reelle==null)
+            {
+                    if($doc->date_prevue >=  date('Y-m-d H:i:s'))
+                {
+                    $doc->status = "En cours";
+                    $doc->save();
+                }
+                else if($doc->date_prevue <  date('Y-m-d H:i:s'))
+                {
+                    $doc->status = "En retard";
+                    $doc->save();
+                }
+
+            }
+            else
+            {
+                    $doc->status = "Payé";
+                    $doc->save();
+            }
+
+        }
+
+        $this->crud->addColumn([
+        // Select
+            'label'     => 'Status',
+            'type'      => 'text',
+            'name'      => 'status', 
+            'attribute' => 'status', 
+            'wrapper'   => [
+            'element' => 'span', 
+            
+            'class' =>  function ($crud, $column, $entry, $related_key){
+                    if ($column['text'] == 'En retard')
+                    {
+                        return 'badge bg-danger';
+                    }
+                    else if($column['text'] == 'En cours')
+                    {
+                        return 'badge bg-warning';
+                    }
+                    else if ($column['text'] == 'Payé')
+                    {
+                        return 'badge bg-success';
+                    }
+            },
+            'style' => 'padding-top: 0.6rem; padding-bottom: 0.6rem; padding-right: 1rem;
+            padding-left: 1rem; ',
+            
+            /*'href' => function ($crud, $column, $entry, $related_key) {
+                return backpack_url('article/'.$related_key.'/show');
+            },*/
+            // 'target' => '_blank',
+            // 'class' => 'some-class',
+        ],
+        ]);
+      
         CRUD::column('document_id');
         CRUD::column('date');
         CRUD::column('date_prevue');

@@ -29,7 +29,7 @@ class DomaineCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Domaine::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/domaine');
-        CRUD::setEntityNameStrings('domaine', 'domaines');
+        CRUD::setEntityNameStrings('domaine', 'Investissement Immobilier');
     }
 
     /**

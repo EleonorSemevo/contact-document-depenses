@@ -28,7 +28,7 @@ class LocaliteCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Localite::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/localite');
-        CRUD::setEntityNameStrings('localite', 'localites');
+        CRUD::setEntityNameStrings('localite', 'localités');
     }
 
     /**

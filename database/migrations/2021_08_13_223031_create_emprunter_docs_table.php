@@ -35,6 +35,7 @@ class CreateEmprunterDocsTable extends Migration
             $table->string('pp')->nullable();
             $table->string('editeur')->nullable();
             $table->string('edition')->nullable();
+            $table->text('status')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
