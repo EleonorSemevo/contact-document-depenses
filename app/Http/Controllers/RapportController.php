@@ -20,6 +20,7 @@ class RapportController extends Controller
             'data' => $this->getInvestissementParLocalite(),
             'total' => $this->getTotal(),
             'domaines' => $this->getAllDomaines(),
+            'local_domaine' => $this->getInvestissementParDomaineParLocalite(),
 
         ]);
 
@@ -47,7 +48,7 @@ class RapportController extends Controller
         return $investissements;
     }
 
-    public function getInvestissementParDomainePar()
+    public function getInvestissementParDomaineParLocalite()
     {
        $actuelle_annee = date("Y"); 
 
@@ -59,12 +60,16 @@ class RapportController extends Controller
                 DB::raw("strftime('%Y', investissements.date) as year"),
                 'domaines.nom as domaine',
                 'localites.nom as localite',
-                'domaines.id')
+                'investissements.domaine_id as domaine_id',
+                'investissements.localite_id as localite_id',
+                'prestataire')
                 ->where('year', '=', "$actuelle_annee")
                 ->where('investissements.deleted_at','=',null)
                 ->join('domaines', 'domaines.id', '=', 'investissements.domaine_id')
                 ->join('localites', 'localites.id', '=', 'investissements.localite_id')
-                ->groupBy('investissements.localite_id','investissements.domaine_id','year')
+                ->groupBy('investissements.localite_id',
+                    'investissements.domaine_id',
+                    'year','prestataire')
                 ->get();
         return $investissements;
     }
@@ -84,5 +89,63 @@ class RapportController extends Controller
     public function getAllDomaines()
     {
         return DB::table("domaines")->get();
+    }
+
+    public function arranger(){
+        $data= [];
+        $valeurs = $this->getInvestissementParDomaineParLocalite();
+
+        foreach($valeurs as $valeur)
+        {
+            if(! $this->existe_deja($data, $valeur))
+            {
+                $valeur.push([
+                    'localite_id' => $valeur->localite_id,
+                    'domaine_id' => $valeur->domaine_id,
+                    'domaine'  => $valeur->domaine,
+                    'localite'  => $valeur->localite,
+                    'oeuvre'  => $valeur->oeuvre,
+                    'transport'  => $valeur->transport,
+                    'intrant'  => $valeur->intrant
+                ]);
+            }
+        }
+
+
+
+    }
+
+    public function faire_sum($table, $valeur, $data)
+    {
+        $sum_oeuvre=0;
+        $sum_intrant=0;
+        $sum_transport=0;
+
+         foreach($table as $tab)
+        {
+            if($tab->domaine_id == $valeur->$domaine_id &&
+                $tab->localite_id == $valeur->$localite_id)
+            {
+                $sum_oeuvre += $tab->oeuvre;
+                $sum_intrant +=$tab->intrant;
+                $sum_transport +=$tab->transport;
+            }
+
+           
+        }
+    }
+
+    public function existe_deja($table,$valeur){
+        foreach($table as $tab)
+        {
+            if($tab->domaine_id == $valeur->$domaine_id &&
+                $tab->localite_id == $valeur->$localite_id)
+            {
+                return true;
+            }
+
+           
+        }
+        return false;
     }
 }
