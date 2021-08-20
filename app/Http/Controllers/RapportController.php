@@ -19,6 +19,7 @@ class RapportController extends Controller
         [
             'data' => $this->getInvestissementParLocalite(),
             'total' => $this->getTotal(),
+            'domaines' => $this->getAllDomaines(),
 
         ]);
 
@@ -35,11 +36,34 @@ class RapportController extends Controller
                 //DB::raw("strftime('%m', investissements.date) as month" ),
                 DB::raw("strftime('%Y', investissements.date) as year"),
                 'domaines.nom as domaine',
-                'localites.nom as localite')
+                'localites.nom as localite',
+                'domaines.id')
                 ->where('year', '=', "$actuelle_annee")
                 ->where('investissements.deleted_at','=',null)
                 ->join('domaines', 'domaines.id', '=', 'investissements.domaine_id')
-                 ->join('localites', 'localites.id', '=', 'investissements.localite_id')
+                ->join('localites', 'localites.id', '=', 'investissements.localite_id')
+                ->groupBy('investissements.localite_id','year')
+                ->get();
+        return $investissements;
+    }
+
+    public function getInvestissementParDomainePar()
+    {
+       $actuelle_annee = date("Y"); 
+
+        $investissements = DB::table('investissements')
+                ->select(DB::raw("SUM(cout_intrant) as intrant"),
+                DB::raw("SUM(cout_main_oeuvre) as oeuvre"),
+                DB::raw("SUM(cout_transport) as transport"),
+                //DB::raw("strftime('%m', investissements.date) as month" ),
+                DB::raw("strftime('%Y', investissements.date) as year"),
+                'domaines.nom as domaine',
+                'localites.nom as localite',
+                'domaines.id')
+                ->where('year', '=', "$actuelle_annee")
+                ->where('investissements.deleted_at','=',null)
+                ->join('domaines', 'domaines.id', '=', 'investissements.domaine_id')
+                ->join('localites', 'localites.id', '=', 'investissements.localite_id')
                 ->groupBy('investissements.localite_id','investissements.domaine_id','year')
                 ->get();
         return $investissements;
@@ -55,5 +79,10 @@ class RapportController extends Controller
         }
 
         return $total;
+    }
+
+    public function getAllDomaines()
+    {
+        return DB::table("domaines")->get();
     }
 }

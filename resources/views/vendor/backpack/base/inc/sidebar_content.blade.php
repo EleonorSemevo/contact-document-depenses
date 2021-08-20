@@ -22,20 +22,20 @@
 <li class="nav-item nav-dropdown">
     <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon las la-store-alt"></i> Documents </a>
     <ul class="nav-dropdown-items">
-    <!--
+    
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('categorie') }}'><i class='nav-icon las la-school'></i> Categories</a></li>
-        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('langue') }}'><i class='nav-icon la la-question'></i> Langues</a></li>
+    <!--    <li class='nav-item'><a class='nav-link' href='{{ backpack_url('langue') }}'><i class='nav-icon la la-question'></i> Langues</a></li>
     -->
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('document') }}'><i class='nav-icon las la-folder'></i> Documents</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('emprunterdoc') }}'><i class='nav-icon las la-address-book'></i> Emprunt de Docs</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('pretdoc') }}'><i class='nav-icon las la-columns'></i> Prêt de docs</a></li>
     </ul>
 </li>
-
+@if(backpack_user()->hasRole('administration'))
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('groupe') }}'><i class='nav-icon la la-question'></i> Groupes</a></li>
 
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('type') }}'><i class='nav-icon la la-question'></i> Types</a></li>
-@if(backpack_user()->hasRole('administration'))
+
 @endif
 
 
