@@ -33,6 +33,7 @@ class DocumentCrudController extends CrudController
         CRUD::setModel(\App\Models\Document::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/document');
         CRUD::setEntityNameStrings('document', 'documents');
+        
     }
 
     /**
@@ -94,6 +95,8 @@ class DocumentCrudController extends CrudController
             9 => 'Indonésien',
             10 => 'Mandarin',], function($value) { // if the filter is active
             $this->crud->addClause('where', 'categorie_id', $value);
+
+            $this->crud->enableExportButtons();
         });
 
         /**

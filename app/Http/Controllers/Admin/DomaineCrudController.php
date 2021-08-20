@@ -52,6 +52,8 @@ class DomaineCrudController extends CrudController
          $this->crud->removeButton('create');
 
         
+
+        
         
         
     }

@@ -43,6 +43,8 @@ class RevenuCrudController extends CrudController
         CRUD::column('montant');
         CRUD::column('date');
 
+        $this->crud->enableExportButtons();
+
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
