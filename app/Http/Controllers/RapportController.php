@@ -8,6 +8,7 @@ use DB;
 use App\Models\Localite;
 use App\Models\Investissement;
 use Carbon\Carbon;
+use App\Models\Groupe;
 
 
 
@@ -21,6 +22,8 @@ class RapportController extends Controller
             'total' => $this->getTotal(),
             'domaines' => $this->getAllDomaines(),
             'local_domaine' => $this->getInvestissementParDomaineParLocalite(),
+            'type_groupes' => $this->getSelonCategorie(),
+            'cat' => $this->categories(),
 
         ]);
 
@@ -148,4 +151,43 @@ class RapportController extends Controller
         }
         return false;
     }
+
+    ///
+    public function getTypesParCartegorie(int $id){
+        $actuelle=[]; 
+
+        $typesCartegorie = DB::table('types')
+                ->select('designation'
+                )
+                ->where('groupe_id','=',$id)
+                
+                ->get();
+        
+                foreach($typesCartegorie as $tab )
+                {
+                    array_push($actuelle, $tab->designation);
+                }
+                return $actuelle;
+    }
+
+    public function categories()
+    {
+        return DB::table('groupes')->get();
+         
+    }
+
+    public function getSelonCategorie()
+    {
+        $table=[];
+        $categories = $this->categories();
+
+        foreach($categories as $category)
+        {
+            array_push($table, ["categorie" => $category->nom, "types" =>  $this-> getTypesParCartegorie($category->id)] );
+        }
+
+        return $table;
+    }
+
+
 }

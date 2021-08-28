@@ -132,7 +132,7 @@ class Helper
     public function getvalues_depenses($depenses, $dep)
     {
         $table = [];
-        for($i=0;$i<12;$i++){
+        for($i=1;$i<12;$i++){
             foreach($depenses as $depense)
             {
                 if ($depense->month ==$i && $depense->designation == $dep->designation){
@@ -187,7 +187,7 @@ class Helper
      public function getvalues_investissement($investissements, $invest)
     {
         $table = [];
-        for($i=0;$i<12;$i++){
+        for($i=1;$i<12;$i++){
             foreach($investissements as $inv)
             {
                 if ($inv->month ==$i && $inv->nom == $invest->nom){
@@ -209,33 +209,7 @@ class Helper
     {
         ///arrange la requette des sous catégories de telles maniere qu'elle puissu être itérée sur le chart
         $general = $depenses;
-        /*foreach ($depenses as $dep)
-        {
-            //prendres toutes ses valeurs
-            $v = $this->getvalues_depenses($depenses,$dep);
-            //l'arranger
-
-            //stocer dans general
-            array_push($general,array(
-                'titre'=>$dep->designation,
-                'values'=> $v
-            ));
-        }
-
-        foreach ($investissements as $invest)
-        {
-            //prendres toutes ses valeurs
-            $in = $this->getvalues_investissement($investissements,$invest);
-            //l'arranger
-
-            //stocer dans general
-            array_push($general,array(
-                'titre'=>$invest->nom,
-                'values'=> $in
-            ));
-        }*/
         
-            //prendres toutes ses valeurs
             $rev = $this->getvalues_revenus($revenus);
             //l'arranger
 
@@ -251,11 +225,11 @@ class Helper
      public function getvalues_revenus($revenus)
      {
         $table = [];
-        for($i=0;$i<12;$i++){
+        for($i=1;$i<12;$i++){
             foreach($revenus as $rev)
             {
                 if ($rev->month ==$i ){
-                    array_push($table, $rev->sm );
+                    array_push($table, intval($rev->sm,10) );
                     break;
                 }
 
@@ -266,6 +240,36 @@ class Helper
         }
         return $table;
 
+     }
+
+     public function arranger_investissement_par_mois($investssement)
+     {
+        $sm=[];
+        for($i=1;$i<12;$i++){
+            foreach($investssement as $rev)
+            {
+                if ($rev->month ==$i ){
+                    array_push($sm, intval($rev->intrant) + intval($rev->oeuvre) + intval($rev->transport) );
+                    break;
+                }
+
+            }
+            if(array_key_last($sm)!=$i){
+                 array_push($sm, 0);
+            }
+        }
+        return $sm;
+
+     }
+
+     public function additionner_investissement_plus_depense_par_mois($depenses,$investissements)
+     {
+         $table = [];
+         for($l=0; $l<12; $l++)
+         {
+             array_push($table,$depenses[$l] + $investissements[$l] );
+         }
+         return $table;
      }
 
 

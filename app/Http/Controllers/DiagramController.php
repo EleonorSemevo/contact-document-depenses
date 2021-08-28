@@ -66,9 +66,17 @@ class DiagramController extends Controller
                 'band' => $chart->band($band_data),
                 'line_diagramm' =>$chart->line_diagramm($line_data),
                 'revenus' =>$this->getRevenusParMois(),
+                ////
+                'intro' => $this->get_investissement_par_annees(2021),
+                //'intro_arranger' => $this->arranger_investissement_par_mois(),
+                'rev_yearly' => $this->get_revenu_par_annee(2021),
+                'dep_yearly' => $this->get_depenses_Par_annee(2021),
+                'to_compare' =>$this->get_values_for_comparison_chart(2021),
                
         ]);
 
     } 
+
+    
 
 }

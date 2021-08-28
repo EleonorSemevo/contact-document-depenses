@@ -273,4 +273,65 @@ class Controller extends BaseController
         return $investissements;
     }
 
+    public function get_investissement_par_annees($year)
+    {
+         //$actuelle_annee = date("Y"); 
+
+       $investissements = DB::table('investissements')
+                ->select(DB::raw("SUM(cout_intrant) as intrant"),
+                DB::raw("SUM(cout_main_oeuvre) as oeuvre"),
+                DB::raw("SUM(cout_transport) as transport"),
+                DB::raw("strftime('%m', investissements.date) as month" ),
+                DB::raw("strftime('%Y', investissements.date) as year"))
+                ->where('year', '=', "$year")
+                ->where('investissements.deleted_at','=',null)
+                ->groupBy('month','investissements.domaine_id')
+                ->get();
+        return $this->helper->arranger_investissement_par_mois($investissements);
+    }
+
+    public function get_depenses_Par_annee($year){
+        
+        $depenses_par_annee = DB::table('depenses')->select(
+            DB::raw("SUM(sommes) as sm"),
+            DB::raw("strftime('%m', depenses.date) as month" ),
+            DB::raw("strftime('%Y', depenses.date) as year")
+        )
+        ->where('depenses.deleted_at','=',null)
+        ->where('year', '=', "$year")
+        ->groupby('month')
+        ->get();
+
+       
+        //return $depenses_month;
+       // return $this->helper->arranger($depenses_par_annee, $this->get_investissement_par_annees($year));
+       return $this->helper->getvalues_revenus($depenses_par_annee);
+
+    }
+
+    public function get_revenu_par_annee($year){
+
+        $revenus = DB::table('revenus')
+        ->select(DB::raw("SUM(montant) as sm"),
+        DB::raw("strftime('%m', revenus.date) as month" ),
+        DB::raw("strftime('%Y', revenus.date) as year"))
+        ->whereYear('revenus.date', $year)
+        ->where('revenus.deleted_at','=',null)
+        ->groupBy('month')
+        ->get();
+
+        //$rl= $this->helper->arranger_pour_line_chart();
+       // return $this->helper->arranger_pour_line_chart($this->getDepensesParMois(), $revenus);
+       return $this->helper->getvalues_revenus($revenus);
+        
+    }
+
+    public function get_values_for_comparison_chart($year)
+    {
+        $invest = $this->get_investissement_par_annees($year);
+        $dep = $this->get_depenses_Par_annee($year);
+        $depenses = $this->helper->additionner_investissement_plus_depense_par_mois($dep,$invest);
+        return $depenses;
+    }
+    
 }
