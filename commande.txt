@@ -1,4 +1,7 @@
-
+Pour installer chartJs
+https://github.com/fxcosta/laravel-chartjs
+Ensuite: npm install chart.js --save
+https://stackoverflow.com/questions/51918932/how-to-properly-include-a-library-from-node-modules-into-your-project
 Pour CONTACTES
 nom, prenom, organisation, poste, numero(portable 2, bureau 2, ), mail(prive2, professionnl2), organisation site, adresse(linkdin, facebook, twitter, skype), boite postale, adresse physique
 

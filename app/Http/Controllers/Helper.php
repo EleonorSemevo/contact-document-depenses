@@ -132,7 +132,7 @@ class Helper
     public function getvalues_depenses($depenses, $dep)
     {
         $table = [];
-        for($i=1;$i<12;$i++){
+        for($i=1;$i<=12;$i++){
             foreach($depenses as $depense)
             {
                 if ($depense->month ==$i && $depense->designation == $dep->designation){
@@ -141,7 +141,7 @@ class Helper
                 }
 
             }
-            if(array_key_last($table)!=$i){
+            if(array_key_last($table)+1!=$i){
                  array_push($table, 0);
             }
         }
@@ -187,7 +187,7 @@ class Helper
      public function getvalues_investissement($investissements, $invest)
     {
         $table = [];
-        for($i=1;$i<12;$i++){
+        for($i=1;$i<=12;$i++){
             foreach($investissements as $inv)
             {
                 if ($inv->month ==$i && $inv->nom == $invest->nom){
@@ -196,7 +196,7 @@ class Helper
                 }
 
             }
-            if(array_key_last($table)!=$i){
+            if(array_key_last($table)+1!=$i){
                  array_push($table, 0);
             }
         }
@@ -225,7 +225,7 @@ class Helper
      public function getvalues_revenus($revenus)
      {
         $table = [];
-        for($i=1;$i<12;$i++){
+        for($i=1;$i<=12;$i++){
             foreach($revenus as $rev)
             {
                 if ($rev->month ==$i ){
@@ -234,7 +234,7 @@ class Helper
                 }
 
             }
-            if(array_key_last($table)!=$i){
+            if(array_key_last($table)+2!=$i){
                  array_push($table, 0);
             }
         }
@@ -245,7 +245,7 @@ class Helper
      public function arranger_investissement_par_mois($investssement)
      {
         $sm=[];
-        for($i=1;$i<12;$i++){
+        for($i=1;$i<=13;$i++){
             foreach($investssement as $rev)
             {
                 if ($rev->month ==$i ){
@@ -254,7 +254,7 @@ class Helper
                 }
 
             }
-            if(array_key_last($sm)!=$i){
+            if(array_key_last($sm)+1!=$i){
                  array_push($sm, 0);
             }
         }
@@ -265,7 +265,7 @@ class Helper
      public function additionner_investissement_plus_depense_par_mois($depenses,$investissements)
      {
          $table = [];
-         for($l=0; $l<12; $l++)
+         for($l=0; $l<=11; $l++)
          {
              array_push($table,$depenses[$l] + $investissements[$l] );
          }

@@ -69,15 +69,102 @@ class DiagramController extends Controller
                 ////
                 'intro' => $this->get_investissement_par_annees(2021),
                 //'intro_arranger' => $this->arranger_investissement_par_mois(),
-                'rev_yearly' => $this->get_revenu_par_annee(2021),
-                'dep_yearly' => $this->get_depenses_Par_annee(2021),
-                'to_compare' =>$this->get_values_for_comparison_chart(2021),
+                'rev_yearly' => $this->get_revenu_par_annee(2021), //revenus par année
+                'dep_yearly' => $this->get_depenses_Par_annee(2021), //array direct de depenses sans nvestissement
+                'to_compare' =>$this->get_values_for_comparison_chart(2021),//depense = nvestissement+depenses par mois par année
                 'chartjs' =>$this->exemp(), 
+                'bande_line_chart' => $this->line_bande(),
+                
             ]);
             
-
+ 
     } 
 
-    
+    public function line_bande()
+    {
+        $annee_en_cours = date("Y");
+        $revenu_annee_en_cours = $this->get_revenu_par_annee($annee_en_cours) ;
+        $depenses_il_y_a_deux_annees = $this->get_values_for_comparison_chart($annee_en_cours-2) ;
+        $depenses_il_y_a_une_annees = $this->get_values_for_comparison_chart($annee_en_cours-1) ;
+        $depenses_il_y_a_trois_annees = $this->get_values_for_comparison_chart($annee_en_cours-3) ;
+        $depenses_annees_en_cours = $this->get_values_for_comparison_chart($annee_en_cours) ;;
 
+
+
+
+
+        $bande_line_chart = app()->chartjs
+        ->name('lineChartTest')
+        ->type('line')
+        ->size(['width' => 400, 'height' => 200])
+        ->labels(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'Aout', 'Sept', 'Oct', 'Nov', 'Dec'])
+        ->datasets([
+            [
+                "type" => 'bar',
+                "label" => "Revenues en ".date("Y"),
+                'backgroundColor' => "rgba(38, 185, 154, 0.7)",
+                'borderColor' => "rgba(38, 185, 154, 0.7)",
+                "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
+                "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
+                "pointHoverBackgroundColor" => "#fff",
+                "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                //'data' => $revenu_annee_en_cours,
+                'data' => [14,20,30,14,58,74,47,56,78, 45,25,14]
+            ],
+            [
+                "type" => 'bar',
+                "label" => "Dépenses de ".$annee_en_cours,
+                'backgroundColor' => "rgba(37, 51, 40, 0.7)",
+                'borderColor' => "rgba(37, 51, 190, 0.7)",
+                "pointBorderColor" => "rgba(37, 51, 40, 0.7)",
+                "pointBackgroundColor" => "rgba(37, 51, 40, 0.7)",
+                "pointHoverBackgroundColor" => "#fff",
+                "pointHoverBorderColor" => "rgba(220,220,220,1)",
+               // 'data' => $depenses_annees_en_cours,
+               'data' => [36,20,30,14,65,74,47,56,78, 45,25,14]
+            ],
+            [
+                "type" => 'line',
+                "label" => "Dépenses de ".($annee_en_cours-1),
+                'backgroundColor' => "rgba(55, 201, 10, 0.7)",
+                'borderColor' => "rgba(55, 201, 10, 0.9)",
+                "pointBorderColor" => "rgba(55, 201, 10, 0.9)",
+                "pointBackgroundColor" => "rgba(55, 201, 10, 0.9)",
+                "pointHoverBackgroundColor" => "#fff",
+                "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                //'data' => $depenses_il_y_a_une_annees,
+                'data' => [14,30,30,14,58,40,47,56,78, 45,25,14]
+            ],
+            [
+                "type" => 'line',
+                "label" => "Dépenses de ".($annee_en_cours-2) ,
+                'backgroundColor' => "rgba(16, 10, 201, 0.9)",
+                'borderColor' => "rgba(16, 10, 201, 0.9)",
+                "pointBorderColor" => "rgba(16, 10, 201, 0.9)",
+                "pointBackgroundColor" => "rgba(16, 10, 201, 0.9)",
+                "pointHoverBackgroundColor" => "#fff",
+                "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                //'data' => $depenses_il_y_a_deux_annees ,
+                'data' => [64,25,30,36,45,39,40,45,46, 45,25,14]
+            ],
+            [
+                "type" => 'line',
+                "label" => "Dépenses de ".($annee_en_cours-3) ,
+                'backgroundColor' => "rgba(237, 102, 5, 0.9)",
+                'borderColor' => "rgba(237, 102, 5, 0.9)",
+                "pointBorderColor" => "rgba(237, 102, 5, 0.9)",
+                "pointBackgroundColor" => "rgba(237, 102, 5, 0.9)",
+                "pointHoverBackgroundColor" => "#fff",
+                "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                //'data' => $depenses_il_y_a_trois_annees ,
+                'data' => [30,25,30,36,45,55,40,45,46, 45,45,14]
+            ]
+        ])
+        ->options([]);
+
+        //return view('chartjs', compact('chartjs'));
+        return $bande_line_chart;
+    }
+
+     
 }

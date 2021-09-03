@@ -287,7 +287,31 @@ class Controller extends BaseController
                 ->where('investissements.deleted_at','=',null)
                 ->groupBy('month','investissements.domaine_id')
                 ->get();
-        return $this->helper->arranger_investissement_par_mois($investissements);
+        //return $this->helper->arranger_investissement_par_mois($investissements);
+        $result = [];
+
+        for($i=1;$i<=12;$i++)
+        {
+            foreach($investissements as $invest)
+            {
+                $invest->month=intval($invest->month);
+                if($invest->month == $i)
+                {
+                    array_push($result, intval($invest->intrant) + intval( $invest->oeuvre) +  intval($invest->transport));
+                   
+                }
+            }
+
+            if($result==null)
+            {
+                array_push($result,0);
+            }
+            else if(array_key_last($result)+1!=$i)
+            {
+                array_push($result,0);
+            }
+        }
+        return $result;
     }
 
     public function get_depenses_Par_annee($year){
@@ -305,7 +329,28 @@ class Controller extends BaseController
        
         //return $depenses_month;
        // return $this->helper->arranger($depenses_par_annee, $this->get_investissement_par_annees($year));
-       return $this->helper->getvalues_revenus($depenses_par_annee);
+       //return $this->helper->getvalues_revenus($depenses_par_annee);
+       $result =[];
+       for($i=1;$i<=12;$i++)
+       {
+           foreach($depenses_par_annee as $dep)
+           {
+               if($i==$dep->month)
+               {
+                   array_push($result, intval($dep->sm));
+                   break;
+               }
+           }
+           if($result==null)
+            {
+                array_push($result,0);
+            }
+           else if (array_key_last($result)+1!=$i)
+           {
+               array_push($result,0);
+           }
+       }
+       return $result;
 
     }
 
@@ -331,7 +376,14 @@ class Controller extends BaseController
         $invest = $this->get_investissement_par_annees($year);
         $dep = $this->get_depenses_Par_annee($year);
         $depenses = $this->helper->additionner_investissement_plus_depense_par_mois($dep,$invest);
+      /* $depenses=[];
+       for($i=0;$i<=11;$i++)
+       {
+           array_push($depenses, $invest[$i] + $dep[$i]);
+       }*/
+        
         return $depenses;
+        
     }
 
     public function exemp()
