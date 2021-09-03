@@ -127,6 +127,7 @@ class PretdocCrudController extends CrudController
              ],
          ]
         );*/
+        $this->crud->addButtonFromModelFunction('top', 'imprimer', 'imprimer');
     }
 
     /**

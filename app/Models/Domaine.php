@@ -44,5 +44,10 @@ class Domaine extends Model
         return '<a class="btn btn-sm btn-link btn-primary" href="http://127.0.0.1:8000/admin/investissement/" data-toggle="tooltip" title="Just a demo custom button."><i class="fa fa-search"></i> Consulter liste</a>';
     }
 
+    public function imprimer(){
+        return '<a class="btn  btn-link btn-success text-white" href="javascript:window.print();" data-toggle="tooltip" title="Just a demo custom button."><i class="fa fa-search"></i>Imprimer</a>';
+    }
+
+ 
 
 }

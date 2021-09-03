@@ -47,7 +47,7 @@ class DomaineCrudController extends CrudController
          * - CRUD::column('price')->type('number');
          * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
          */
-        $this->crud->addButtonFromModelFunction('line', 'create_invest', 'create_invest', 'beginning');
+         $this->crud->addButtonFromModelFunction('line', 'create_invest', 'create_invest', 'beginning');
          $this->crud->addButtonFromModelFunction('top', 'liste_invest', 'liste_invest');
          $this->crud->removeButton('create');
 

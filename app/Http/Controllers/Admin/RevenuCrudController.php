@@ -50,6 +50,7 @@ class RevenuCrudController extends CrudController
          * - CRUD::column('price')->type('number');
          * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
          */
+        $this->crud->addButtonFromModelFunction('top', 'imprimer', 'imprimer');
     }
 
     /**

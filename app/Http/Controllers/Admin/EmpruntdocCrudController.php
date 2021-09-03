@@ -40,6 +40,7 @@ class EmpruntdocCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::setFromDb(); // columns
+        $this->crud->addButtonFromModelFunction('top', 'imprimer', 'imprimer');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:

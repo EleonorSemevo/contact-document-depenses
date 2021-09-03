@@ -43,6 +43,7 @@ class DepenseCrudController extends CrudController
         CRUD::column('sommes');
         CRUD::column('date');
         $this->crud->enableExportButtons();
+        $this->crud->addButtonFromModelFunction('top', 'imprimer', 'imprimer');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:

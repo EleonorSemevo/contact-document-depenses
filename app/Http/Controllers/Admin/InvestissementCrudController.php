@@ -57,6 +57,7 @@ class InvestissementCrudController extends CrudController
          * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
          */
         $this->crud->enableExportButtons();
+        $this->crud->addButtonFromModelFunction('top', 'imprimer', 'imprimer');
     }
 
     /**

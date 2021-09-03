@@ -51,4 +51,8 @@ class Investissement extends Model
     {
         return $this->belongsTo(\App\Models\Localite::class);
     }
+
+    public function imprimer(){
+        return '<a class="btn  btn-link btn-success text-white" href="javascript:window.print();" data-toggle="tooltip" title="Just a demo custom button."><i class="fa fa-search"></i>Imprimer</a>';
+    }
 }

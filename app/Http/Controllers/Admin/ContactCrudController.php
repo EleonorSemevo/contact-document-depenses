@@ -41,6 +41,7 @@ class ContactCrudController extends CrudController
     {
         CRUD::setFromDb(); // columns
         $this->crud->enableExportButtons();
+        $this->crud->addButtonFromModelFunction('top', 'imprimer', 'imprimer');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
