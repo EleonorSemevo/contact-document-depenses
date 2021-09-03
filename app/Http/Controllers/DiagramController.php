@@ -72,8 +72,9 @@ class DiagramController extends Controller
                 'rev_yearly' => $this->get_revenu_par_annee(2021),
                 'dep_yearly' => $this->get_depenses_Par_annee(2021),
                 'to_compare' =>$this->get_values_for_comparison_chart(2021),
-               
-        ]);
+                'chartjs' =>$this->exemp(), 
+            ]);
+            
 
     } 
 
