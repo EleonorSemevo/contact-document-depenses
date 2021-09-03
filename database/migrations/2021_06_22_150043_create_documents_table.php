@@ -19,6 +19,9 @@ class CreateDocumentsTable extends Migration
             $table->id();
             $table->foreignId('categorie_id')->constrained('categories')->onDelete('cascade');
             $table->foreignId('langue_id')->constrained('langues')->onDelete('cascade');
+            $table->foreignId('discipline_id')->constrained('disciplines')->onDelete('cascade');
+            $table->string('code')->nullable();
+            $table->string('nom_revue')->nullable(); 
             $table->string('titre');
             $table->string('sous_titre')->nullable();
             $table->string('auteur');

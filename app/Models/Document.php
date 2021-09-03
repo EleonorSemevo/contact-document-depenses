@@ -19,6 +19,9 @@ class Document extends Model
     protected $fillable = [
         'categorie_id',
         'langue_id',
+        'discipline_id',
+        'nom_revue',
+        'code',
         'titre',
         'sous_titre',
         'auteur',
@@ -44,6 +47,7 @@ class Document extends Model
         'id' => 'integer',
         'categorie_id' => 'integer',
         'langue_id' => 'integer',
+        'discipline_id' =>'integer',
     ];
 
 
@@ -55,6 +59,11 @@ class Document extends Model
     public function langue()
     {
         return $this->belongsTo(\App\Models\Langue::class);
+    }
+
+    public function discipline()
+    {
+        return $this->belongsTo(\App\Models\Discipline::class);
     }
 
     public function imprimer(){

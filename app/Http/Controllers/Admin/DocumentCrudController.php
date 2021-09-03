@@ -45,6 +45,8 @@ class DocumentCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::column('categorie_id');
+        CRUD::column('discipline_id');
+        CRUD::column('code');
         CRUD::column('langue_id');
         CRUD::column('titre');
         CRUD::column('sous_titre');
@@ -104,7 +106,7 @@ class DocumentCrudController extends CrudController
          * - CRUD::column('price')->type('number');
          * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
          */
-        $this->crud->addButtonFromModelFunction('top', 'imprimer', 'imprimer');
+        $this->crud->addButtonFromModelFunction('top', 'imprimer', 'imprimer', 'beginning');
     }
 
     /**
@@ -118,9 +120,12 @@ class DocumentCrudController extends CrudController
         CRUD::setValidation(DocumentRequest::class);
 
         CRUD::field('categorie_id');
+        CRUD::field('discipline_id');
+        CRUD::field('code');
         CRUD::field('langue_id');
         CRUD::field('titre');
         CRUD::field('sous_titre');
+        CRUD::field('nom_revue');
         CRUD::field('auteur');
         CRUD::field('co_auteur');
         CRUD::field('ISBN');

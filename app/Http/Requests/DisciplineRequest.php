@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Http\Requests\Request;
 use Illuminate\Foundation\Http\FormRequest;
 
-class DocumentRequest extends FormRequest
+class DisciplineRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,10 +27,6 @@ class DocumentRequest extends FormRequest
     {
         return [
             // 'name' => 'required|min:5|max:255'
-            'titre' => 'required',
-            'auteur' => 'required',
-            'code' =>'required',
-        
         ];
     }
 

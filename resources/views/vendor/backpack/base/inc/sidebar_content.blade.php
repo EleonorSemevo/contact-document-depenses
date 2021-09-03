@@ -82,3 +82,5 @@
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('localite') }}'><i class='nav-icon la la-question'></i> Localites</a></li>
 
 -->
+
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('discipline') }}'><i class='nav-icon la la-question'></i> Disciplines</a></li>
